@@ -1,0 +1,1 @@
+C:\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPHelloWorld\UWPHelloWorld.csproj;x86

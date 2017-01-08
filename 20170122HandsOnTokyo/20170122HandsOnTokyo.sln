@@ -5,6 +5,13 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWPHelloWorld", "UWPHelloWorld\UWPHelloWorld.csproj", "{42E90683-FF3F-488B-BD0C-B957499DEFE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWPGithubReposOnLabel", "UWPGithubReposOnLabel\UWPGithubReposOnLabel.csproj", "{97CE5555-4E38-4103-B9E9-6E4E3C969B67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC5B5D99-64EF-41D6-8A87-DDCF5AD58ED3}"
+	ProjectSection(SolutionItems) = preProject
+		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -33,6 +40,24 @@ Global
 		{42E90683-FF3F-488B-BD0C-B957499DEFE4}.Release|x86.ActiveCfg = Release|x86
 		{42E90683-FF3F-488B-BD0C-B957499DEFE4}.Release|x86.Build.0 = Release|x86
 		{42E90683-FF3F-488B-BD0C-B957499DEFE4}.Release|x86.Deploy.0 = Release|x86
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|ARM.ActiveCfg = Debug|ARM
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|ARM.Build.0 = Debug|ARM
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|ARM.Deploy.0 = Debug|ARM
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|x64.ActiveCfg = Debug|x64
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|x64.Build.0 = Debug|x64
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|x64.Deploy.0 = Debug|x64
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|x86.ActiveCfg = Debug|x86
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|x86.Build.0 = Debug|x86
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Debug|x86.Deploy.0 = Debug|x86
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|ARM.ActiveCfg = Release|ARM
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|ARM.Build.0 = Release|ARM
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|ARM.Deploy.0 = Release|ARM
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|x64.ActiveCfg = Release|x64
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|x64.Build.0 = Release|x64
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|x64.Deploy.0 = Release|x64
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|x86.ActiveCfg = Release|x86
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|x86.Build.0 = Release|x86
+		{97CE5555-4E38-4103-B9E9-6E4E3C969B67}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
