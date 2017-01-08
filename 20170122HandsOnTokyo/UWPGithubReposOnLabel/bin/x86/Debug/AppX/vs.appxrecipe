@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPGithubReposOnLabel\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-01-08T07:04:16.507</Modified>
+      <Modified>2017-01-08T18:27:38.451</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPGithubReposOnLabel\bin\x86\Debug\UWPGithubReposOnLabel.exe">
       <PackagePath>entrypoint\UWPGithubReposOnLabel.exe</PackagePath>
-      <Modified>2017-01-08T07:04:16.165</Modified>
+      <Modified>2017-01-08T18:27:37.024</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\yuki\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -505,7 +505,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPGithubReposOnLabel\bin\x86\Debug\Core\UWPGithubReposOnLabel.exe">
       <PackagePath>UWPGithubReposOnLabel.exe</PackagePath>
-      <Modified>2017-01-08T07:04:16.500</Modified>
+      <Modified>2017-01-08T18:27:38.446</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

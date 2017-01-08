@@ -16,6 +16,7 @@ using System.Net;
 using Windows.UI.Popups;
 using System.Net.Http;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 を参照してください
 
@@ -36,16 +37,18 @@ namespace UWPGithubReposOnLabel
         {
             var dialog = new MessageDialog("Get Github repos", "Get Github repos");      // 直接叩きに行く or EditableBlock作ってもいいかも?
             await dialog.ShowAsync();
-            GetGithubRepos();
+            var result = await GetGithubRepos("mizune");
+            this.label.Text = result;
 
 
         }
-        public async void GetGithubRepos(/* string userName */) // or not WebClientは使えない
+        public async Task<string> GetGithubRepos(string userName) // or not WebClientは使えない
         {
             var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
             // Debug.WriteLine(string.Format("https://api.github.com/users/{0}/repos"));
 
-            var content = await  httpClient.GetStringAsync("https://api.github.com/users/r-ralph/repos");
+            return await  httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos",userName));
             
             // this.label.Text = result;
 
