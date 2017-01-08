@@ -25,6 +25,16 @@ namespace UWPHelloWorld
         public MainPage()
         {
             this.InitializeComponent();
+            this.button.Click += button_Click;
+        }
+
+        private async void button_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new MessageDialog("Hello UWP world!", "hello world");
+            await dialog.ShowAsync();
+            this.button.Content = "Hello UWP World";
+            this.label.FontSize = 30;
+            this.label.Text = "You're Completed first step!";
         }
     }
 }

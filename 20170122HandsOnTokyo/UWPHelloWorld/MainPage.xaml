@@ -8,6 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="label" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" Margin="0,100,0,0">Fuga</TextBlock>
+        <Button x:Name="button" Content="Click Here" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="30,50,30,0"/>
 
     </Grid>
 </Page>
