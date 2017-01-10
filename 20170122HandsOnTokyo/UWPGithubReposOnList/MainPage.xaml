@@ -9,7 +9,9 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Button x:Name="Button" Content="Click Here" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="0,0,0,0" Height="30"/>
-        <ListView x:Name="RepoList" HorizontalAlignment="Stretch" Margin="0,0,0,30" VerticalAlignment="Stretch" />
+        <ListView x:Name="RepoList" HorizontalAlignment="Stretch" Margin="0,0,0,30" VerticalAlignment="Stretch">
+            
+        </ListView>
 
     </Grid>
 </Page>
