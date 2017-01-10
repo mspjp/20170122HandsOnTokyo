@@ -28,13 +28,13 @@
     <AppXManifest Include="D:\Projects\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPGithubReposOnLabel\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-01-09T11:11:18.911</Modified>
+      <Modified>2017-01-10T00:52:43.583</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Projects\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPGithubReposOnLabel\bin\x86\Debug\UWPGithubReposOnLabel.exe">
       <PackagePath>entrypoint\UWPGithubReposOnLabel.exe</PackagePath>
-      <Modified>2017-01-09T11:11:17.484</Modified>
+      <Modified>2017-01-10T00:52:42.264</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Mizune\.nuget\packages\Microsoft.CSharp\4.0.0\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -501,11 +501,11 @@
     <AppxPackagedFile Include="D:\Projects\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPGithubReposOnLabel\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-01-09T11:11:18.577</Modified>
+      <Modified>2017-01-10T00:52:43.338</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Projects\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPGithubReposOnLabel\bin\x86\Debug\Core\UWPGithubReposOnLabel.exe">
       <PackagePath>UWPGithubReposOnLabel.exe</PackagePath>
-      <Modified>2017-01-09T11:11:18.898</Modified>
+      <Modified>2017-01-10T00:52:43.575</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

@@ -26,12 +26,12 @@ namespace UWPHelloWorld
             {
             case 1:
                 {
-                    this.label = (global::Windows.UI.Xaml.Controls.TextBlock)(target);
+                    this.Label = (global::Windows.UI.Xaml.Controls.TextBlock)(target);
                 }
                 break;
             case 2:
                 {
-                    this.button = (global::Windows.UI.Xaml.Controls.Button)(target);
+                    this.Button = (global::Windows.UI.Xaml.Controls.Button)(target);
                 }
                 break;
             default:

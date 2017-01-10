@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -16,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 を参照してください
 
-namespace UWPHelloWorld
+namespace UWPGithubReposOnList
 {
     /// <summary>
     /// それ自体で使用できる空白ページまたはフレーム内に移動できる空白ページ。
@@ -31,11 +33,29 @@ namespace UWPHelloWorld
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new MessageDialog("Hello UWP world!", "hello world");
+            var dialog = new MessageDialog("Get Github repos", "Get Github repos");      // 直接叩きに行く or EditableBlock作ってもいいかも?
             await dialog.ShowAsync();
-            this.Button.Content = "Hello UWP World";
-            this.Label.FontSize = 30;
-            this.Label.Text = "You're Completed first step!";
+            var result = await GetGithubRepos("mizune");
+            
+
+
+        }
+
+        public void SetListData(string data)
+        {
+            
+        }
+
+        public async Task<string> GetGithubRepos(string userName) // or not WebClientは使えない
+        {
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
+            // Debug.WriteLine(string.Format("https://api.github.com/users/{0}/repos"));
+
+            return await httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos", userName));
+
+            // this.label.Text = result;
+
         }
     }
 }
