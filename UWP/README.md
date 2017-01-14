@@ -128,9 +128,10 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 
 >### メモ  
 >主要なパラメーターとして背景色などの色は「ブラシ」、座標や余白などに関しては「レイアウト」、表示されている文字の大きさやフォントに関しては「テキスト」にパラメーターがあります。  
->パラメーターの数はたくさんあるため全部覚える必要はなく、必要なときに調べて使えればいいと思います。 
->例えばボタンの場所を変えるには「レイアウト」のMarginを変更します。
->左100 上100にすると図のようになります。
+>パラメーターの数はたくさんあるため全部覚える必要はなく、必要なときに調べて使えればいいと思います。  
+>
+>例えばボタンの場所を変えるには「レイアウト」のMarginを変更します。  
+>左100 上100にすると図のようになります。  
 >![img](./img/1-2/note1.png)  
 
 ### 2.3 テキストブロックを追加しよう
@@ -163,8 +164,8 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 (TextBlockの位置がわかるようにテストと言う文字を表示します)
 ```xaml  
 <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Button Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
     <TextBlock>テスト</TextBlock>
+    <Button Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
 </Grid>
 ```
 
@@ -195,7 +196,7 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 
 場所の変更はMerginプロパティーを指定することで変更できます。
 
-例えばページの左から20、上から10の位置に移動させたいときは
+例えばページの左から20、上から100の位置に移動させたいときは
 
 ```xaml
 　<TextBlock Foreground="Red" Margin="20, 40, 0, 0">テスト</TextBlock>
@@ -205,3 +206,147 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 
 ここまで行うい実行すると以下のようになります。  
 ![img](./img/1-2/13.png)  
+
+>## メモ
+>XAMLに記述する要素の順番には意味があります。  
+>例えば先程のサンプルのTextBlockとButtonの順番を入れ替えてみます。  
+>```cs
+><Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+>   <Button Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
+>   <TextBlock Foreground="Red" Margin="20, 40, 0, 0">テスト</TextBlock>
+></Grid>
+>```
+>この状態で実行してボタンをクリックするとクリックできません。  
+>これはボタンの手前にテキストブロックが表示されているためです。  
+>基本的には下の要素ほど手前に来ますが、要素の前後関係を制御するにはZIndexプロパティーを指定することで制御できます。
+
+
+## 3.ボタンを押したときに処理をしよう
+先程追加したボタンはそのままでは何も起きません。  
+UIパーツはそれぞれが例えば押された、マウスが乗った、キーが押されたなどの**イベント**が起きたときに処理を追加してあげることで初めて動きます。  
+
+今回はボタンを押されたときにメッセージボックスが表示され、テキストブロックの文字が変わると言うものを作ります。  
+
+### 3.1 UIパーツに名前をつける
+イベントの処理を行うためにC#のコードを書きますが、C#のコードでUIパーツを識別するためにXAMLで名前をつけます。
+
+名前の指定はXAMLの各要素に x:Name="名前" を属性として追加します。  
+先程追加したボタンにはButton、テキストブロックにはLabelという名前を追加します。  
+
+```xaml  
+<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <TextBlock x:Name="Label" Foreground="Red" Margin="20, 40, 0, 0">テスト</TextBlock>
+    <Button x:Name="Button" Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
+</Grid>
+```
+
+### 3.2 イベントハンドラーの追加
+ボタンが押された、マウスが乗ったなどのイベントが起きたときに行う処理（イベントハンドラー）を追加します。  
+まず、現在編集しているMainPage.xamlに関連付けられたC#のコード MainPage.xaml.csを開きます。  
+
+![img](./img/1-3/1.png)
+
+開くとthis.InitializeComponent();を呼び出しているだけのコンストラクターがあります。  
+InitializeComponent()はXAMLから自動生成されたコードの中で定義されています。  
+
+次にボタンを押されたときに処理するメソッドを作成します。  
+
+戻り値や引数の型は決められたものにする必要がありますが、メソッド名は自由に決めても大丈夫です。  
+ここではbutton_Clickとします。  
+
+```cs
+private async void button_Click(object sender, RoutedEventArgs e)
+{
+    /*あとで追加*/
+}
+```
+
+続けてボタンが押されたというイベントと作成したメソッドを対応付けます。  
+
+コンストラクターを以下のように変更します。  
+
+```cs
+public MainPage()
+{
+    this.InitializeComponent();
+    this.Button.Click += button_Click;
+}
+```
+
+これは先程**Button**と名付けたボタンの**クリックイベント**が起きたときに**button_Click**というメソッドを呼び出すように登録する...という処理になります。  
+
+### 3.3 ダイアログを出してみる
+このままではメソッドが呼び出されても何もしないので試しにダイアログを出してみます。  
+
+UWPのダイアログはいくつか種類がありますが、ここでは簡単に使えるMessageDialogを使います。
+
+
+```cs
+private async void button_Click(object sender, RoutedEventArgs e)
+{
+    var dialog = new MessageDialog("Hello UWP world!", "hello world");
+    await dialog.ShowAsync();
+}
+```
+
+MessageDialogのインスタンスを作成しdialogという変数に格納します。  
+その後MessageDialogのShowAsync()を呼び出すことでダイアログが表示されます。  
+ShowAsyncは非同期なメソッドなのでawaitをつけてダイアログを閉じるまで待ちます。  
+
+上記のコードを追加してもnew MessageDialog付近に赤下線がでてきます。
+
+![img](./img/1-3/2.png)  
+
+下線の上にマウスカーソルを持っていくとヒントボタンが出てくるのでusing Windows.UI.Popups;を選択します。  
+
+![img](./img/1-3/3.png)  
+![img](./img/1-3/4.png)  
+
+これはC言語のincludeに相当するものです。  
+
+この段階で実行しボタンを押してみると図のようにダイアログが表示されます。  
+![img](./img/1-3/5.png)  
+
+![img](./img/1-3/6.png)
+
+### 3.4 テキストブロックやボタンのプロパティを変更する
+先程に引き続きボタンが押されたときにテキストブロックやボタンのプロパティを変更してみます。  
+ボタンの文字列を変更するにはButtonのContentプロパティーを変更します。  
+
+```cs
+private async void button_Click(object sender, RoutedEventArgs e)
+{
+    var dialog = new MessageDialog("Hello UWP world!", "hello world");
+    await dialog.ShowAsync();
+    this.Button.Content = "Hello UWP World";
+}
+```
+お気づきかもしれませんが、XAMLで設定したプロパティーの名前とコードで指定するプロパティー名は対応しています。
+
+同様にテキストブロックのプロパティーも変更してみます。  
+いろいろなプロパティがありますが文字の大きさ(FontSize)とテキスト(Text)を変えてみます。  
+
+```cs
+private async void button_Click(object sender, RoutedEventArgs e)
+{
+    var dialog = new MessageDialog("Hello UWP world!", "hello world");
+    await dialog.ShowAsync();
+    this.Button.Content = "Hello UWP World";
+    this.Label.FontSize = 30;
+    this.Label.Text = "You're Completed first step!";
+}
+```
+
+この状態で実行しボタンを押すと、ダイアログが表示され、ダイアログを閉じるとテキストブロックのサイズと文字、ボタンの文字が変化します。  
+
+![img](./img/1-3/7.png)
+
+# お疲れ様でした
+これにて午前の部 UWP編は終わりです。  
+
+時間がある方、難易度が低いと感じた方は引き続き発展課題にも挑戦してみてください。
+また、帰宅後に興味を持ったという方はぜひ発展課題に挑戦してみてください。  
+
+なお、発展課題の内容は午後に行うXamarin編と同等の内容をUWPで行うものになります。  
+
+# 発展課題1 Githubのリポジトリー一覧をテキストブロックに表示するサンプル
