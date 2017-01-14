@@ -13,10 +13,10 @@ UWP編のフォルダーには以下のものが含まれています。
 * **README.md** : この資料
 * **20170122HandsOnTokyo.sln** : 最終的な完成品のソリューションファイル
 * **UWPHelloWorld/** : 課題 ボタン・テキストブロック・ダイアログのサンプル
-* **UWPGithubReposOnLabel/** : 発展課題1 Githubのリポジトリー一覧を **ラベル** に表示するサンプル
+* **UWPGithubReposOnLabel/** : 発展課題1 Githubのリポジトリー一覧を **テキストブロック** に表示するサンプル
 * **UWPGithubReposOnList/** : 発展課題2 Githubのリポジトリー一覧を **リスト** に表示するサンプル
 
-# 課題 ボタン・ラベル・ダイアログ
+# 課題 ボタン・テキストブロック・ダイアログ
 ## 1.まずはプロジェクトを作ってみよう
 インストールされたVisual Studioを起動します。  
 起動したら以下の画面が立ち上がります。  
@@ -92,6 +92,8 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 
 ![img](./img/1-2/4.png) 
 
+場所を変更したい場合はグラフィカルビュー上のボタンをドラッグすることで変更できます。
+
 この状態で実行するとボタンが表示されます。
 
 ![img](./img/1-2/5.png)  
@@ -122,4 +124,75 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 >主要なパラメーターとして背景色などの色は「ブラシ」、座標や余白などに関しては「レイアウト」、表示されている文字の大きさやフォントに関しては「テキスト」にパラメーターがあります。  
 >パラメーターの数はたくさんあるため全部覚える必要はなく、必要なときに調べて使えればいいと思います。 
 
-### 2.3 
+### 2.3 テキストブロックを追加しよう
+今度は文字を表示するテキストブロックを追加します。  
+先程のボタンと異なりXAMLのコードを直接編集して追加します。
+
+コードビューのコードを見ると以下のようになっていると思います。
+
+``` xaml
+<Page
+    x:Class="App1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Button Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Page>
+```
+
+重要なのは<Grid ...>から< /Grid>の間で、ここにUIのデザインをXAMLで記述します。
+
+すでにグラフィカルビューで追加したボタンに関するXAMLが追加されています。  
+
+この1行下にTextBlockを追加します。  
+(TextBlockの位置がわかるようにテストと言う文字を表示します)
+```xaml  
+<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Button Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
+    <TextBlock>テスト</TextBlock>
+</Grid>
+```
+
+するとグラフィカルビューが更新されテキストブロックが追加されたのがわかると思います。
+
+![img](./img/1-2/9.png)  
+
+### 2.4 テキストブロックの文字色と場所を変えてみよう
+ボタンの時と同様にグラフィカルビューで要素を選択してプロパティーから変更することも可能ですが、ここではXAMLを直接編集して変更してみます。
+
+文字色の変更ですがForegroundプロパティーを指定することで変更できます。
+
+赤色にするなら以下のようにTextBlockのXAMLを変更します。  
+
+```xaml
+<TextBlock Foreground="Red">テスト</TextBlock>
+```
+
+もし、Visual Studioで手で入力されている方はForegくらいまで入力すると自動補完が効いて選択肢が1つになると思うのでそのままEnterキーを押すことで入力できます。    
+![img](./img/1-2/10.png)   
+また、指定する色も指定できる色の一覧が候補として表示されると思います。  
+![img](./img/1-2/11.png)  
+
+色を指定すると即グラフィカルビューが更新されます。  
+また、プロパティーウィンドウを開いていた方はそちらも更新されていることに気づくかと思います。。
+
+![img](./img/1-2/12.png)  
+
+場所の変更はMerginプロパティーを指定することで変更できます。
+
+例えばページの左から20、上から10の位置に移動させたいときは
+
+```xaml
+<TextBlock Foreground="Red" Margin="20, 10, 0, 0">テスト</TextBlock>
+```
+
+のように編集します。
+
+ここまで行うと以下のようになります。  
+![img](./img/1-2/13.png)  
