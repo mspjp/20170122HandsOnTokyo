@@ -1,1 +1,0 @@
-D:\Projects\Git\Repos\20170122HandsOnTokyo\20170122HandsOnTokyo\UWPGithubReposOnLabel\UWPGithubReposOnLabel.csproj;x86
