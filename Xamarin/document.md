@@ -60,7 +60,7 @@ xamarinの開発においても今回はC#とXAMLという2つの言語を使い
 
 「ソリューションエクスプローラー」から「自身の作成したプロジェクト名(画像ではsamplexamarin)」内の「MainPage.xaml」をダブルクリックして開きます。
 
-![Xaml編集場所xaml]()
+![Xaml編集場所xaml](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E7%B7%A8%E9%9B%86%E5%A0%B4%E6%89%80.PNG)
 
 するとXamlエディタが表示されます。
 
@@ -75,7 +75,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 まずはMainPage.xamlのコードを見てみましょう
 
-![Xaml開いたコード]()
+![Xaml開いたコード](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/Xaml%E9%96%8B%E3%81%84%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89.PNG)
 
 ここの7行目~10行目にある
 
@@ -103,7 +103,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 初めに実行したようにローカルコンピューターの右側の三角形を押します。他の設定は変えないでください。
 
-![Hello World ビルド]()
+![Hello World ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/Hello%20World%E3%83%93%E3%83%AB%E3%83%89%E6%88%90%E5%8A%9F.png)
 
 このように変更されたことがわかります。
 
