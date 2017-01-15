@@ -51,3 +51,60 @@ Windows10のどのバージョン向けにプロジェクトを作成するか�
 
 このような実行結果が得られたらひとまず成功です。
 ![初期ビルド成功](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89%E6%88%90%E5%8A%9F.PNG)
+
+##2.画面をデザインしよう
+
+xamarinの開発においても今回はC#とXAMLという2つの言語を使います。
+
+今回編集する箇所は以下の画像のMainPage.xaml内になります。
+
+「ソリューションエクスプローラー」から「自身の作成したプロジェクト名(画像ではsamplexamarin)」内の「MainPage.xaml」をダブルクリックして開きます。
+
+![Xaml編集場所xaml]()
+
+するとXamlエディタが表示されます。
+
+![Xaml開いた]()
+
+UWPと違ってXamarinの方はグラフィカルビューがありませんのでご注意ください。
+
+なのでコードを直接記述してレイアウトの編集を行っていきます。
+
+
+2.1 初期につくられたコードを理解しよう！
+
+まずはMainPage.xamlのコードを見てみましょう
+
+![Xaml開いたコード]()
+
+ここの7行目~10行目にある
+
+```MainPage.Xaml
+<Label Text="Welcome to Xamarin Forms!"
+         VerticalOptions="Center"
+         HorizontalOptions="Center" />
+```
+
+このコードによって先ほど実行した画面のWelcome to Xamarin Forms!が表示されています。
+
+この中の
+
+```MainPage.Xaml
+<Label Text="Welcome to Xamarin Forms!"
+```
+
+を
+
+```MainPage.Xaml
+<Label Text="Hello World!"
+```
+
+と変えることで実行画面が以下のようにかわるます
+
+初めに実行したようにローカルコンピューターの右側の三角形を押します。他の設定は変えないでください。
+
+![Hello World ビルド]()
+
+このように変更されたことがわかります。
+
+ここから色々と変えていきましょう
