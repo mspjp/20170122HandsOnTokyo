@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -15,6 +16,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using UWPGithubReposOnLabel;
 
 // 空白ページのアイテム テンプレートについては、http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 を参照してください
 
@@ -36,14 +39,27 @@ namespace UWPGithubReposOnList
             var dialog = new MessageDialog("Get Github repos", "Get Github repos");      // 直接叩きに行く or EditableBlock作ってもいいかも?
             await dialog.ShowAsync();
             var result = await GetGithubRepos("mizune");
-            
+            SetListData(result);
 
 
         }
 
-        public void SetListData(string data)
+        public async void SetListData(string data)
         {
-            
+            var sources = JsonConvert.DeserializeObject<List<GithubRepo>>(data);
+            Debug.WriteLine("Deserialized object");
+            var list = new List<string>();
+            sources.ForEach(x =>
+            {
+                list.Add(x.Url);
+            });
+
+            // var res = from x in sources select x.Url;
+            foreach (var url in list)
+            {             
+                this.RepoList.Items.Add(url);
+            }
+
         }
 
         public async Task<string> GetGithubRepos(string userName) // or not WebClientは使えない
