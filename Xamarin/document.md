@@ -26,28 +26,28 @@ xamarin編のフォルダーには以下のものが含まれます。
 プロジェクトのテンプレートを選択するダイアログが表示されます。
 今回はVisualC#内のCloss-Platform内のBlank Xaml App(Xamarin.FormsShared)
 を選択しOKを押しましょう名前はなんでもかまいません。
-![VSプロジェクト作成画面]()
+![VSプロジェクト作成画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/2017-01-15.png)
 
 作成時間に時間がかかるので少々お待ちください。
 
 作成時にこのような画面が出るかと思いますがskipしてください
-![vsformac]()
+![vsformac](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/vsformac.png)
 
 Windows10のどのバージョン向けにプロジェクトを作成するか聞かれるのでデフォルトのまま「OK」を押します。
 
 ![img](https://github.com/mspjp/20170122HandsOnTokyo/blob/mmitti/add_uwp_document/UWP/img/1-1/5.png)
 
 時間がたてばこのような画面が表示されると思います。
-![xamarinForms作成成功画面]()
+![xamarinForms作成成功画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xamarinforms%E4%BD%9C%E6%88%90%E7%94%BB%E9%9D%A2.png)
 
 このような画面が作成されればプロジェクトの作成は成功です。
 
 正しく生成できたか確認するために一旦ビルドしましょう。
 
 下記の画像のようにビルドの設定を変えましょう
-![xamarinForms初期ビルド]()
+![xamarinForms初期ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xamarin%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89.jpg)
 
 変更できたらローカルコンピューターの左にある矢印を押して実行しましょう
 
 このような実行結果が得られたらひとまず成功です。
-![初期ビルド成功]()
+![初期ビルド成功](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89%E6%88%90%E5%8A%9F.PNG)
