@@ -52,7 +52,7 @@ Windows10のどのバージョン向けにプロジェクトを作成するか�
 このような実行結果が得られたらひとまず成功です。
 ![初期ビルド成功](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89%E6%88%90%E5%8A%9F.PNG)
 
-##2.画面をデザインしよう
+## 2.画面をデザインしよう
 
 xamarinの開発においても今回はC#とXAMLという2つの言語を使います。
 
@@ -71,7 +71,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 なのでコードを直接記述してレイアウトの編集を行っていきます。
 
 
-2.1 初期につくられたコードを理解しよう！
+## 2.1 初期に作られたコードを理解しよう！
 
 まずはMainPage.xamlのコードを見てみましょう
 
@@ -108,3 +108,71 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 このように変更されたことがわかります。
 
 ここから色々と変えていきましょう
+
+## 2.2 ボタンとラベルを配置してみよう！
+
+MainPage.xaml内の
+
+```MainPage.Xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:samplexamarin"
+             x:Class="samplexamarin.MainPage">
+
+	<Label Text="Hello World!"
+           VerticalOptions="Center"
+           HorizontalOptions="Center" />
+
+</ContentPage>```
+
+を
+
+```MainPage.Xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:helloxamarin"
+             x:Class="helloxamarin.MainPage"
+             Title="Hello world">
+<StackLayout>
+
+  <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+  </StackLayout>
+
+</ContentPage>
+```
+
+に変えましょう。x:Nameというものがありますがこれはx:Class属性というものでコードビハインドとXAMLファイルを紐づけるためのタグとなります。コードビハインドクラスは5行目の             x:Class="helloxamarin.MainPage"によってhelloxamarin.MainPageになることがわかります。
+
+変更したことによって以下のような画像になります。
+
+![xaml画像ビルド]()
+
+## 2.3 ボタンを押したときにラベルを変化させよう！
+
+MainPage.xaml.csを編集していきます。
+以下のように編集しましょう
+
+![Mainpage.xamal.cs編集画面]()
+
+上の画像はこのコードを追加したものです。
+
+```
+button.Clicked += (sender, e) =>
+{
+    this.labelHelloWorld.Text = "Hello World!";
+};
+
+```
+
+コードの記入ができたら実行してみましょう
+
+![xamlラベル変更ビルド]()
+
+上の画像はクリックした結果になります。
+
+クリックしてラベルの文字が変更されれば成功です。
+
+何かエラーが発生した場合はメンターに質問してください。
