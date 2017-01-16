@@ -49,7 +49,7 @@ namespace UWPGithubReposOnLabel
             // Debug.WriteLine(string.Format("https://api.github.com/users/{0}/repos"));
 
             Debug.WriteLine(httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos", userName)));
-            return await  httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos",userName));
+            return httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos",userName));
             
             // this.label.Text = result;
 

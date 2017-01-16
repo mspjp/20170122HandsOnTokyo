@@ -33,7 +33,7 @@ UWP編のフォルダーには以下のものが含まれています。
 
 ![img](./img/1-1/3.png)  
 
-名前は任意ですが、ここではUWPHelloとします。
+名前は任意ですが、ここではUWPHnadsonとします。
 
 内容を確認し、問題なければ「OK」ボタンを押します。
 
@@ -130,9 +130,23 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 >主要なパラメーターとして背景色などの色は「ブラシ」、座標や余白などに関しては「レイアウト」、表示されている文字の大きさやフォントに関しては「テキスト」にパラメーターがあります。  
 >パラメーターの数はたくさんあるため全部覚える必要はなく、必要なときに調べて使えればいいと思います。  
 >
->例えばボタンの場所を変えるには「レイアウト」のMarginを変更します。  
->左100 上100にすると図のようになります。  
+>ボタンの場所を変えるには「レイアウト」のMargin、VerticalAlignment、HorizontalAlignment、変更します。  
+>Marginは上下左右からどれだけ隙間を空けるか、HorizontalAlignment(水平方向)とVerticalAlignment(垂直方向)はボタンを上や左に配置するか、中央に配置するか、左右広げて配置するかなどを制御します。  
+>  
+>例えばHorizontalAlignmentをLeft、 VerticalAlignmentをTop、Marginを左100 上100にすると図のようになります。  
 >![img](./img/1-2/note1.png)  
+>これはボタンを左上に配置し、左から100、上から100隙間を空けるという指定になります。
+>
+>VerticalAlignment,HorizontalAlignmentの設定とMarginの関係は以下の図のようになります。  
+>![img](./img/1-2/note2.png)   
+>※すべてマージンを左・上が100　右・下が50で設定してあります。  
+>※また、ボタンに表示されている文字はVerticalAlignment、HorizontalAlignmentの順で示しています。
+>
+>VerticalAlignmentやHorizontalAlignmentにStretchを指定すると図のように左右、もしくは上下方向にめいいっぱいに広がります。  
+>![img](./img/1-2/note3.png)  
+>
+>このようにMargin、HorizontalAlignment、VerticalAlignmentを変更することでどこにUIパーツの場所を制御できます。
+
 
 ### 2.3 テキストブロックを追加しよう
 今度は文字を表示するテキストブロックを追加します。  
@@ -160,11 +174,17 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 
 すでにグラフィカルビューで追加したボタンに関するXAMLが追加されています。  
 
+```xaml
+<Button Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
+```
+
+先頭のButtonはButtonというUIパーツを指し、他のContentoやHorizontal Alignmentなどはプロパティーを示します。  
+
 この1行下にTextBlockを追加します。  
 (TextBlockの位置がわかるようにテストと言う文字を表示します)
 ```xaml  
 <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <TextBlock>テスト</TextBlock>
+    <TextBlock Text="テスト"></TextBlock>
     <Button Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
 </Grid>
 ```
@@ -181,7 +201,7 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 赤色にするなら以下のようにTextBlockのXAMLを変更します。  
 
 ```xaml
-<TextBlock Foreground="Red">テスト</TextBlock>
+<TextBlock Text="テスト" Foreground="Red"></TextBlock>
 ```
 
 もし、Visual Studioで手入力されている方はForegくらいまで入力すると自動補完が効いて選択肢が1つになると思うのでそのままEnterキーを押すことで入力できます。    
@@ -196,24 +216,28 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 
 場所の変更はMerginプロパティを指定することで変更できます。
 
-例えばページの左から20、上から100の位置に移動させたいときは
+例えばページの左から10、上から40の位置に移動させたいときは
 
 ```xaml
-　<TextBlock Foreground="Red" Margin="20, 40, 0, 0">テスト</TextBlock>
+<TextBlock Text="テスト" Foreground="Red" Margin="0, 40, 0, 0"></TextBlock>
 ```
-
 のように編集します。
 
-ここまで行うい実行すると以下のようになります。  
+また、このままだとテキストブロックが上40から一番下までを占めているので VerticalAlignmentをTopに指定します。
+```xaml
+<TextBlock Text="テスト" Foreground="Red" Margin="10, 40, 0, 0" VerticalAlignment="Top"></TextBlock>
+```
+
+ここまで行い実行すると以下のようになります。  
 ![img](./img/1-2/13.png)  
 
 >## メモ
 >XAMLに記述する要素の順番には意味があります。  
->例えば先程のサンプルのTextBlockとButtonの順番を入れ替えてみます。  
->```cs
+>例えば先程のサンプルのTextBlockとButtonの順番を入れ替え、TextBlockの VerticalAlignmentをStretchにしてみます。
+>```xaml
 ><Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 >   <Button Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
->   <TextBlock Foreground="Red" Margin="20, 40, 0, 0">テスト</TextBlock>
+>   <TextBlock Text="テスト" Foreground="Red" Margin="20, 40, 0, 0" VerticalAlignment="Stretch"></TextBlock>
 ></Grid>
 >```
 >この状態で実行してボタンをクリックするとクリックできません。  
@@ -235,7 +259,7 @@ UIパーツはそれぞれが例えば押された、マウスが乗った、キ
 
 ```xaml  
 <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <TextBlock x:Name="Label" Foreground="Red" Margin="20, 40, 0, 0">テスト</TextBlock>
+    <TextBlock x:Name="Label" Text="テスト" Foreground="Red" Margin="10, 40, 0, 0" VerticalAlignment="Top"></TextBlock>
     <Button x:Name="Button" Content="Click Here" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top"/>
 </Grid>
 ```
@@ -345,8 +369,157 @@ private async void button_Click(object sender, RoutedEventArgs e)
 これにて午前の部 UWP編は終わりです。  
 
 時間がある方、難易度が低いと感じた方は引き続き発展課題にも挑戦してみてください。
-また、帰宅後に興味を持ったという方はぜひ発展課題に挑戦してみてください。  
+また、帰宅後に興味を持ったという方もぜひ発展課題に挑戦してみてください。  
 
 なお、発展課題の内容は午後に行うXamarin編と同等の内容をUWPで行うものになります。  
 
-# 発展課題1 Githubのリポジトリー一覧をテキストブロックに表示するサンプル
+# 発展課題1 Githubのリポジトリー一覧をテキストブロックに表示する
+この課題では「ボタン」を押すと「テキストボックス」で指定したユーザーのリポジトリ一覧GithubのAPIを利用して取得し、「テキストブロック」に表示するものを作成します。  
+発展課題1では主にリポジトリ一覧を取得する部分を作成します。  
+
+参考 [GithubAPIのリファレンス](https://developer.github.com/v3/)
+
+## 1.テキストボックスの追加
+基本課題を引き続き編集していきます。  
+今回は文字を入力するUIパーツのテキストボックス(TextBox)を追加します。  
+
+ツールボックスからTextBoxを探し、グラフィカルビューのページにドラッグ・アンド・ドロップで追加するか、以下のようにXAMLを編集して追加します。  
+```xaml
+<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!-- 省略 -->
+    <TextBox></TextBox>
+</Grid>
+```
+
+また、C#のコードの方で入力された文字を取得するので名前をつけます。  
+ここではUserNameという名前をつけます。 
+
+```xaml
+<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!-- 省略 -->
+    <TextBox x:Name="UserName"></TextBox>
+</Grid>
+```
+
+また、お好みで場所などのレイアウトを調整してください。    
+
+サンプルでは以下のように配置を変更しました。  
+```xaml  
+<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <TextBlock x:Name="Label" Text="テスト" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,100,0,0"></TextBlock>
+    <TextBox x:Name="UserName" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="30,0,30,60"/>
+    <Button x:Name="Button" Content="Click Here" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="30,0,30,20"/>
+</Grid>
+```
+
+上記のXAMLの場合は以下のような配置になります。  
+![img](./img/2/1.png)
+
+## 2. テキストボックスに入力された文字を取得する
+続けてテキストボックスに入力された文字列を取得してみます。  
+ここでは実際に取得できたことを確認するため、**ボタン**を押すと、**テキストボックス**に入力された文字が**テキストブロック**に表示される物を作ります。  
+
+ボタンのクリックイベントが起きたときに呼び出される**button_Clickメソッド**を変更します。
+
+
+```cs
+private async void button_Click(object sender, RoutedEventArgs e)
+{
+    var name = this.UserName.Text;
+    this.Label.Text = name;
+}
+```
+テキストボックスに入力された文字はTextプロパティーに格納されているのでそれをname変数にいれ、テキストブロックのTextプロパティーにセットすることでテキストボックスに入力された文字列がテキストブロックに表示されます。  
+
+この状態で実行しテキストボックスに文字を入れてボタンを押すと、図のようにテキストブロックに同じ文字が表示されていると思います。  
+![img](./img/2/2.png)
+
+## 3. GithubのAPIを呼び出す
+ここでは実際にGithubのAPIを呼び出し、指定したユーザーのリポジトリ一覧を取得します。  
+
+今回利用するAPIのURLは  
+https://api.github.com/users/ユーザー名/repos  
+です。  
+実際にブラウザでアクセス([https://api.github.com/users/mspjp/repos](https://api.github.com/users/mspjp/repos))してみると  
+```json
+[
+  {
+    "id": 50595877,
+    "name": "20160208AzureHandsonNagoya",
+    "full_name": "mspjp/20160208AzureHandsonNagoya",
+    "owner": {
+      "login": "mspjp",
+      "id": 19600008,
+以下略
+```
+のようにjson形式で応答が帰ってきます。  
+
+今回はGithubのAPIサーバーを呼び出すのにHttpClientクラスを利用します。  
+このクラスはブラウザのようにHTTPサーバーに接続し、データを受信できるクラスです。  
+
+まずはMainPage.xaml.csにGithubのAPIを呼び出し、呼び出した結果を取得するメソッドを作成します。  
+
+```cs
+public async Task<string> GetGithubRepos(string userName) {
+    /*これから実装*/
+}
+```
+検索するユーザー名を引数としてもらい文字列string型で取得結果を返却する関数です。  
+しかし、HttpClientでHTTPサーバーに接続し、応答を取得する処理は非同期処理なのでasyncキーワードを付け、Task<string>型を返す必要があります。  
+
+このコードをコピペするとTaskとGetGithubReposに赤波線が出ますが、Taskの方はマウスカーソルを持っていき、ヒントボンタからusingを選択するかコード上部にusing System.Threading.Tasks;を追加してください。  
+(GetGithubReposの赤波線はreturn指定内から出ているだけです。あとで実装するので放置です。)  
+
+まず、URLを作成します。  
+https://api.github.com/users/ユーザー名/reposのユーザー名を引数のuserNameにします。  
+置換や文字列の結合など実装方法は複数ありますが、ここではstring.Formatを利用します。  
+
+```cs
+var url = string.Format("https://api.github.com/users/{0}/repos", userName);
+```
+string.Formatの第一引数のフォーマット文字列の中の{0}を第二引数に指定されたものに置換します。    
+第行き引数に指定する書式については[こちら](https://msdn.microsoft.com/ja-jp/library/dwhawy9k(v=vs.110).aspx)を御覧ください。
+
+続けてHttpClientクラスのインスタンスを作成し、HTTPリクエストのヘッダーにユーザーエージェントを指定します。  
+明示的にユーザーエージェントを指定しなくてもHTTPサーバーに接続できる場合もありますが、GithubAPIガイドラインにユーザーエージェントを指定することが必須となっているため明示的に指定します。  
+
+```cs
+var httpClient = new HttpClient();
+httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
+```
+
+最後にhttpClient.GetStringAsync(string URL)を非同期で呼び出すことで指定したURLにリクエストを送った結果を取得します。
+
+```cs
+return await httpClient.GetStringAsync(url);
+```
+
+ここまでをまとめるとGetGithubReposメソッドは以下のようになります。
+```cs
+public async Task<string> GetGithubRepos(string userName) {
+    var url = string.Format("https://api.github.com/users/{0}/repos", userName);
+    var httpClient = new HttpClient();
+    httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
+    return await httpClient.GetStringAsync(url);
+}
+```
+
+このメソッドを先程修正したbutton_Clickメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧がテキストブロックに表示されます。  
+
+```cs
+private async void button_Click(object sender, RoutedEventArgs e)
+{
+    var name = this.UserName.Text;
+    var result = await GetGithubRepos(name);
+    this.Label.Text = result;
+}
+```
+
+このこまで実装した状態で、実行し、テキストボックスにGithubのユーザー名を入力してボタンを押すと以下のようになります。  
+![img](./img/2/3.png)
+
+なお、ユーザーが見つからない場合は以下のように表示されます。  
+![img](./img/2/3.png)
+
+# 発展課題2
+
