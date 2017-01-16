@@ -64,7 +64,7 @@ xamarinの開発においても今回はC#とXAMLという2つの言語を使い
 
 するとXamlエディタが表示されます。
 
-![Xaml開いた]()
+![Xaml開いた](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E9%96%8B%E3%81%84%E3%81%9F.PNG)
 
 UWPと違ってXamarinの方はグラフィカルビューがありませんのでご注意ください。
 
@@ -148,14 +148,14 @@ MainPage.xaml内の
 
 変更したことによって以下のような画像になります。
 
-![xaml画像ビルド]()
+![xaml画像ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E7%94%BB%E5%83%8F%E3%83%93%E3%83%AB%E3%83%89.png)
 
 ## 2.3 ボタンを押したときにラベルを変化させよう！
 
 MainPage.xaml.csを編集していきます。
 以下のように編集しましょう
 
-![Mainpage.xamal.cs編集画面]()
+![Mainpage.xamal.cs編集画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/Xaml%E9%96%8B%E3%81%84%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89.PNG)
 
 上の画像はこのコードを追加したものです。
 
@@ -169,7 +169,7 @@ button.Clicked += (sender, e) =>
 
 コードの記入ができたら実行してみましょう
 
-![xamlラベル変更ビルド]()
+![xamlラベル変更ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E3%83%A9%E3%83%99%E3%83%AB%E5%A4%89%E6%9B%B4%E7%94%BB%E9%9D%A2.png)
 
 上の画像はクリックした結果になります。
 
