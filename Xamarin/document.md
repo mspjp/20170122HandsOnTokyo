@@ -80,9 +80,11 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 ここの7行目~10行目にある
 
 ```MainPage.Xaml
+
 <Label Text="Welcome to Xamarin Forms!"
          VerticalOptions="Center"
          HorizontalOptions="Center" />
+
 ```
 
 このコードによって先ほど実行した画面のWelcome to Xamarin Forms!が表示されています。
@@ -90,13 +92,17 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 この中の
 
 ```MainPage.Xaml
+
 <Label Text="Welcome to Xamarin Forms!"
+
 ```
 
 を
 
 ```MainPage.Xaml
+
 <Label Text="Hello World!"
+
 ```
 
 と変えることで実行画面が以下のようにかわるます
@@ -114,6 +120,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 MainPage.xaml内の
 
 ```MainPage.Xaml
+
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -124,11 +131,14 @@ MainPage.xaml内の
            VerticalOptions="Center"
            HorizontalOptions="Center" />
 
-</ContentPage>```
+</ContentPage>
+
+```
 
 を
 
 ```MainPage.Xaml
+
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -141,7 +151,8 @@ MainPage.xaml内の
   <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
   </StackLayout>
 
-</ContentPage>
+</ContentPage>]
+
 ```
 
 に変えましょう。x:Nameというものがありますがこれはx:Class属性というものでコードビハインドとXAMLファイルを紐づけるためのタグとなります。コードビハインドクラスは5行目の             x:Class="helloxamarin.MainPage"によってhelloxamarin.MainPageになることがわかります。
@@ -159,13 +170,25 @@ MainPage.xaml.csを編集していきます。
 
 上の画像はこのコードを追加したものです。
 
-```
+```MainPage.Xaml.cs
+
 button.Clicked += (sender, e) =>
 {
     this.labelHelloWorld.Text = "Hello World!";
 };
 
 ```
+
+上記の式はラムダ式と呼ばれるもので
+
+```
+
+(引数1, 引数2...) => 式
+
+```
+
+で定義されるものでプログラムの書き方のひとつになります。
+
 
 コードの記入ができたら実行してみましょう
 
