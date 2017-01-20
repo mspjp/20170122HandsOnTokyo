@@ -535,22 +535,43 @@ private async void button_Click(object sender, RoutedEventArgs e)
 # 発展課題2
 発展課題2では発展課題1で取得したGithubAPIの応答を加工し一覧表示（List）をします。
 
-## 1. 取得したjsonデータをC#のオブジェクトに変換
+## 1. ライブラリの導入
 取得したjsonをC#のオブジェクトに変換するため、Json.netというライブラリを導入します。  
 
 Json.netを利用したjsonからC#のオブジェクトに変換する方法として複数の方法がありますが、ここでは自作クラスに変換する方法を用います。  
 
 json.netについては[こちら](http://www.newtonsoft.com/json)を御覧ください。  
 
-
 ライブラリの導入にはnugetというパッケージマネージャーを利用します。  
 
-手順  
+プロジェクトを右クリックし「NuGetパッケージの管理(N)」を選択します。  
+![img](./img/3/1.png)  
+
+次に「参照」を選択し検索ボックスに「Json.net」と入力します。  
+![img](./img/3/2.png)  
+
+「Newtonsoft.Json」を選択し「インストール」を選択します。  
+![img](./img/3/3.png)  
+
+インストールするプロジェクトの名前を確認して「OK」を選択します。  
+![img](./img/3/4.png)  
+
+出力に正常にインストールされましたと表示されれば完了です。  
+![img](./img/3/5.png)  
+
+## 2. 取得したjsonデータをC#のオブジェクトに変換
 
 次に、json構造と同じ内容のC#のクラスを作成します。  
 jsonの構造に合わせて同じ名前、型を決めて定義します。  
 
-ここではGithubRepos.csとして作成しました。
+クラスの作成はプロジェクトを右クリックし「追加(D)」から「新しい項目(W)」を選択します。  
+![img](./img/3/6.png)  
+
+「クラス」を選択し、クラス名を入力します。  
+ここではGithubRepos.csとして作成しました。  
+![img](./img/3/7.png)  
+
+内容は以下のようにします。  
 
 ```cs
 using System;
@@ -659,55 +680,79 @@ namespace UWPHandson
 ```
 
 続けてjsonオブジェクトからGithubRepoの配列に変換します。  
-とりあえず、変換できるかどうかを確認するため、ボタンクリック時に呼び出されるbutton_Clickメソッド内でたしかめます。  
+MainPage.xaml.csを開き、変換できるかどうかを確認するため、ボタンクリック時に呼び出されるbutton_Clickメソッド内でたしかめます。  
 
 ```cs
-
+private async void button_Click(/*略*/) {
+    /*略*/
+    var sources = JsonConvert.DeserializeObject<List<GithubRepo>>(result);
+}
 ```
-
 
 最後に変換されたかどうかをデバッガーを利用し確認します。  
 
-ブレークポイント配置、デバッグ方法、変数の見方など
+var sourcesの行にブレークポイントを配置し実行します。  
+![img](./img/3/8.png)  
+
+ブレークポイントにヒットしたあとはステップオーバーをクリックし、1行進めたところでsourcesにマウスカーソルを載せると変数の中身を見ることができます。  
+![img](./img/3/9.png)
+
+ブレークポイント配置、デバッグ方法、変数の見方などは[こちら](https://github.com/mspjp/201612hackathonyokohama/blob/master/csharp/DEBUG.md)を御覧ください。  
 
 確認できたあとはbutton_Clickに追加した確認用のコードは削除してください。
 
 ## 2. リスト形式で表示
-続けて、MainPage.xamlを開き、一覧表示を行うリスト(ListView)を追加します。  
+続けて、MainPage.xamlを開き、一覧表示を行うリスト(ListView)を追加します。 
+また、TextBlockは削除してください。   
 
 ```xaml
+<ListView x:Name="RepoList" HorizontalAlignment="Stretch" Margin="0,0,0,100" VerticalAlignment="Stretch"/>
 ```
 
 ここではRepoListと名前をつけました。  
 
 ListViewはItemsに要素を追加したり、Xaml上で子に要素を追加すると一列に並べて表示されます。  
 
-続けてMainPage.csに戻り、jsonの文字列からGithubRepoクラスに変換し、RepoListに要素を追加するメソッドを追加します。  
+続けてMainPage.csに戻り、Labelに関する行を削除し、jsonの文字列からGithubRepoクラスに変換し、RepoListに要素を追加するメソッドを追加します。  
 
 ```cs
-
+public void SetListData(string data) {
+    /* これから実装 */
+}
 ```
 
 まずは、引数として渡されたjson文字列からGithubRepoクラスの配列に変換します。  
 
 ```cs
-
+public void SetListData(string data) {
+    var sources = JsonConvert.DeserializeObject<List<GithubRepo>>(data);
+}
 ```
 
 つづけてGithubRepoの配列から1つずつ要素を取り出し、適当な情報をリストのItemsに追加します。  
 ここではurlを表示することにします。  
 
 ```cs
-
+public void SetListData(string data) {
+    /*略*/
+    foreach (var src in sources) {             
+        this.RepoList.Items.Add(src.Url);
+    }
+}
 ```
 
 最後に作成したメソッドをボタンが押され、GithubのAPIの応答が帰ってきたあとの部分で呼び出します。   
 
 ```cs
-
+private async void button_Click(/*略*/)
+{
+    /*略*/
+    SetListData(result);
+}
 ```
 
 これでボタンを押すとGithubのAPIを呼び出しjsonを取得、取得したjsonをGithubRepoクラスに変換し、リポジトリの情報（ここではUrl）を取り出しリストに表示する　までができました。  
 
 この状態で実行すると図のようになります。  
 
+![img](./img/3/10.png)
