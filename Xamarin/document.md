@@ -79,7 +79,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 ここの7行目~10行目にある
 
-```MainPage.Xaml
+```cs
 
 <Label Text="Welcome to Xamarin Forms!"
          VerticalOptions="Center"
@@ -91,7 +91,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 この中の
 
-```MainPage.Xaml
+```cs
 
 <Label Text="Welcome to Xamarin Forms!"
 
@@ -99,7 +99,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 を
 
-```MainPage.Xaml
+```cs
 
 <Label Text="Hello World!"
 
@@ -119,7 +119,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 MainPage.xaml内の
 
-```MainPage.Xaml
+```cs
 
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -137,7 +137,7 @@ MainPage.xaml内の
 
 を
 
-```MainPage.Xaml
+```cs
 
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -170,7 +170,7 @@ MainPage.xaml.csを編集していきます。
 
 上の画像はこのコードを追加したものです。
 
-```MainPage.Xaml.cs
+```cs
 
 button.Clicked += (sender, e) =>
 {
