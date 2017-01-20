@@ -452,7 +452,9 @@ https://api.github.com/users/ユーザー名/repos
       "id": 19600008,
 以下略
 ```
-のようにjson形式で応答が帰ってきます。  
+のようにjson形式で応答が帰ってきます。 
+
+参考 json [Wikipedia](https://ja.wikipedia.org/wiki/JavaScript_Object_Notation) 
 
 今回はGithubのAPIサーバーを呼び出すのにHttpClientクラスを利用します。  
 このクラスはブラウザのようにHTTPサーバーに接続し、データを受信できるクラスです。  
@@ -504,7 +506,7 @@ public async Task<string> GetGithubRepos(string userName) {
 }
 ```
 
-このメソッドを先程修正したbutton_Clickメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧がテキストブロックに表示されます。  
+このメソッドを先程修正したbutton_Clickメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧を含むjsonがテキストブロックに表示されます。  
 
 ```cs
 private async void button_Click(object sender, RoutedEventArgs e)
@@ -522,4 +524,10 @@ private async void button_Click(object sender, RoutedEventArgs e)
 ![img](./img/2/3.png)
 
 # 発展課題2
+発展課題2では発展課題1で取得したGithubAPIの応答を加工し一覧表示（List）をします。
 
+## 1. 取得したjsonデータをC#のオブジェクトに変換
+
+## 2. 単純なリスト形式で表示
+
+## 3. 複雑なリスト形式で表示
