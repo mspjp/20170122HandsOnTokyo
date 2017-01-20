@@ -45,8 +45,6 @@ namespace UWPGithubReposOnList
         {
             var sources = JsonConvert.DeserializeObject<List<GithubRepo>>(data);
             
-            var list = new List<string>();
-            
             foreach (var src in sources)
             {             
                 this.RepoList.Items.Add(src.Url);
