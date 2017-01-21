@@ -730,13 +730,13 @@ public void SetListData(string data) {
 ```
 
 つづけてGithubRepoの配列から1つずつ要素を取り出し、適当な情報をリストのItemsに追加します。  
-ここではurlを表示することにします。  
+ここでは名前を表示することにします。  
 
 ```cs
 public void SetListData(string data) {
     /*略*/
     foreach (var src in sources) {             
-        this.RepoList.Items.Add(src.Url);
+        this.RepoList.Items.Add(src.Name);
     }
 }
 ```
@@ -751,7 +751,7 @@ private async void button_Click(/*略*/)
 }
 ```
 
-これでボタンを押すとGithubのAPIを呼び出しjsonを取得、取得したjsonをGithubRepoクラスに変換し、リポジトリの情報（ここではUrl）を取り出しリストに表示する　までができました。  
+これでボタンを押すとGithubのAPIを呼び出しjsonを取得、取得したjsonをGithubRepoクラスに変換し、リポジトリの情報（ここではName）を取り出しリストに表示する　までができました。  
 
 この状態で実行すると図のようになります。  
 
