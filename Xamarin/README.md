@@ -147,7 +147,7 @@ MainPage.xaml内の
              Title="Hello world">
 <StackLayout>
 
-  <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Button x:Name="Button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
   <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
   </StackLayout>
 
@@ -221,7 +221,7 @@ MainPage.xamlに以下のようになるように編集します.
              Title="Hello world">
   <StackLayout>
     <Entry /> <!-- Added  -->
-    <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Button x:Name="Button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
     <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
   </StackLayout>
 </ContentPage>
@@ -238,7 +238,7 @@ MainPage.xamlに以下のようになるように編集します.
              Title="Hello world">
   <StackLayout>
     <Entry x:Name="Entry" /> <!-- Added  -->
-    <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Button x:Name="Button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
     <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
   </StackLayout>
 </ContentPage>
@@ -256,11 +256,141 @@ Androidの場合はこんな感じになるはずです。
 続けてエントリに入力された文字列を取得します。
 ここではここでは実際に取得できたことを確認するため、`ボタン`を押すと、`エントリ`に入力された文字が`ラベル`に表示される物を作ります。
 
-ボタンのクリックイベントが起きた時に呼び出される`button_Click`メソッドの中身を変更します。
+ボタンのクリックイベントが起きた時に呼び出される`button_Click`メソッドを変更します。
 
-```MainPage.xaml
+```MainPage.xaml.cs
+private async void Button_ClickedAsync(object sender, EventArgs e)
+{
+    var name = this.Entry.Text;
+    this.Label.Text = name; 
+}
+```
+
+まずメソッドの`void`の前に非同期処理を示す`async`キーワードを追加します。
+さらに非同期処理を行う関数なので関数名を`Button_Clicked`から`Button_ClickedAsync`に変更します。(これは可読性を上げるためですのでやらなくてもOKです)
+
+そしてコンストラクタに変更を加えます。
+
+```MainPage.xaml.cs
+public MainPage()
+{
+    InitializeComponent();
+    this.Button.Clicked += Button_ClickedAsync; // changed
+}
+```
+
+エントリに入力された文字はEntryプロパティに格納されているので、これを取り出し、ラベルのTextプロパティにセットします。
+こうすることでエントリに入力された文字列がラベル上に表示されます。
+
+この状態でアプリケーションを立ち上げ、エントリに文字を入力しボタンを押すと図のようにラベルに同じ文字が表示されます。
+
+## 3. GithubのAPIを呼び出す
+次は実際にGithubのAPIを呼び出し、指定したユーザのリポジトリ一覧を取得します。
+
+今回利用するAPIのエンドポイント(接続URL)は
+[https://api.github.com/users/ユーザー名/repos](https://api.github.com/users/ユーザー名/repos)
+
+実際にブラウザでアクセスしてみると指定したユーザのリポジトリ一覧がjson形式で返ってきます。
+
+今回はGithubのAPIサーバーを呼び出すのにHttpClientクラスを利用します。
+このクラスはブラウザのようにHTTPサーバーに接続し、データを受信できるクラスです。
+
+まずはMainPage.xaml.csにGithubのAPIを呼び出し、呼び出した結果を取得するメソッドを作成します。
+
+```MainPage.xaml.cs
+public async Task<string> GetGithubRepos(string userName)
+{
+    /*これから実装*/
+}
+```
+UWPの発展課題に挑戦した方ならお気づきだと思いますが、GithubのAPIと接続するソースコードはUWPと共有することができます.
+
+これから作成する関数は検索するユーザ名を引数とし、取得結果をstring型で返却する非同期関数です。
+
+今回はネットワーク等結果が得られるか不確定な部分があるので、try-catchという手法を用います。
+
+```MainPage.xaml.cs
+try
+{
+
+}
+catch(Exception e)
+{
+
+}
+```
+これを記述することでtryブロックに含まれるソースコードが、実行中にエラーが起きた場合、アプリケーションが落ちるのを防いでくれます。
+ここから先のコードはtryブロックの内部に記述していきます。
+
+次にHttpClientクラスのインスタンスを作成し設定を行います。HttpClientは処理が終わったらきちんと解放したいためusingブロックを用います。
+これを用いることで処理が終わった後に自動的にCloseしてくれます。
+```MainPage.xaml.cs
+using(httpClient = new HttpClient())
+{
+  httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
+}
+```
+GithubのAPIではHTTPヘッダにユーザエージェントを指定することが必須となっているため、3行目にてその設定を行っています。
+
+次にURLを作成します。
+```MainPage.xaml.cs
+var url = string.Format("https://api.github.com/users/{0}/repos", userName);
+```
+
+文字列結合の方法は複数存在しますが今回はstring.Formatを使用します。
+そしてにGetStringAsyncメソッドを用いて結果を取得します。
+
+```MainPage.xaml.cs
+return await httpClient.GetStringAsync(url);
+```
+
+最後にエラーが発生した場合にエラーメッセージを表示したいのでcatchブロックの中に以下を記述します。
+
+```MainPage.xaml.cs
+await DisplayAlert("Error", e.ToString(), "OK");
+```
+
+ここまでをまとめるとGetGithubReposメソッドは以下のようになります。
+```MainPage.xaml.cs
+public async Task<string> GetGithubRepos(string userName)
+{                                  
+    try
+    {
+        using (var httpClient = new HttpClient())
+        {
+            httpClient.DefaultRequestHeaders.Add("User-Agent",
+                "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
+            return await httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos", userName));
+        }
+    }
+    catch (Exception e)
+    {
+        await DisplayAlert("Error", e.ToString(), "OK");       
+    }   
+}
 
 ```
+このメソッドを先程修正したButton_ClickedAsyncメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧を含むjsonがテキストブロックに表示されます。
+
+```MainPage.xaml.cs
+private async void Button_ClickedAsync(object sender, EventArgs e)
+{
+    var name = this.Entry.Text;
+    var result = await GetGithubRepos(name); 
+    this.Label.Text = result;
+}
+```
+このこまで実装した状態で、実行し、テキストボックスにGithubのユーザー名を入力してボタンを押すと以下のようになります。
+
+図　実行時
+
+
+
+
+
+
+
+
 
 
 
