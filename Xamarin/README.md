@@ -171,7 +171,6 @@ MainPage.xaml.csを編集していきます。
 上の画像はこのコードを追加したものです。
 
 ```cs
-
 button.Clicked += (sender, e) =>
 {
     this.labelHelloWorld.Text = "Hello World!";
