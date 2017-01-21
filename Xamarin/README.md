@@ -198,3 +198,32 @@ button.Clicked += (sender, e) =>
 クリックしてラベルの文字が変更されれば成功です。
 
 何かエラーが発生した場合はメンターに質問してください。
+
+# Macの方へandroidでのビルド
+
+Macの方はxamarinstudioで進めているため、Xamarin.UWPファイルが存在せず、
+
+ローカルPCでの起動ができないためandroidで起動しましょう
+
+xamarinstudioでのXamarinForms作成方法は以下の通りになります。
+
+まずはxamarinstudioを起動してください
+
+そして下記画像のように
+
+新しいソリューション => Multiplatform => Forms Appを選択してください
+
+![Formapp](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Formsappp.png)
+
+作成ができたら以下のような画像のようなファイル構成でソリューションが作られます
+
+![Macファイル](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Mac%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png)
+
+作成できましたら以下の画像のように左上の部分を変更してください
+Xamarin.Droid > Debug > Androidエミュレーター or 実機
+
+![Android](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Macandroid%E8%B5%B7%E5%8B%95_Ink_LI.jpg)
+
+上記画像のようにビルド成功してエミュレータが起動できれば成功です。（上記画像はPCのメモリが足りずアプリの画面まではいけてないのですがビルドは成功しています）
+
+後はWindowsと同じファイルを編集していくことになりますので引き続き作業を進めてください。
