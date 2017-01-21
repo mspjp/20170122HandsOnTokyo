@@ -12,10 +12,13 @@
 準備ができていない方はお近くのスタッフに声をかけてください。
 
 ## 2. ファイル構成
-xamarin編のフォルダーには以下のものが含まれます。
+xamarin編のフォルダーには以下のものが含まれます。  
+* **/helloxamarin** :  基本課題の完成品プロジェクト  
+* **/XamarinGithubReposOnLabel** : 追加課題1 Githubのリポジトリ一覧をラベルに表示するの完成品  
+* **/XamarinGithubReposOnList** : 追加課題2 Githubから取得したリポジトリをリスト形式で一覧表示するの完成品
 
 
-# 課題1 ボタンを押して文字を変えてみよう！
+# 課題 ボタンを押して文字を変えてみよう！
 
 ## 1.まずはプロジェクトを作ってみようxamarin編
 インストールされたVisual Studioを起動します。起動したら以下の画面が立ち上がります
@@ -133,7 +136,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 ここの7行目~10行目にある
 
-```cs
+```xaml
 
 <Label Text="Welcome to Xamarin Forms!"
          VerticalOptions="Center"
@@ -145,7 +148,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 この中の
 
-```cs
+```xaml
 
 <Label Text="Welcome to Xamarin Forms!"
 
@@ -153,7 +156,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 を
 
-```cs
+```xaml
 
 <Label Text="Hello World!"
 
@@ -173,7 +176,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 MainPage.xaml.cs内のLabel x:Name内に
 
-```cs
+```xaml
 
  TextColor="Blue" FontSize="Medium"
 
@@ -185,7 +188,7 @@ TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更
 
 追加した結果のコードは以下のようになります
 
-```cs
+```xaml
 
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -212,7 +215,7 @@ TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更
 
 MainPage.xaml内の
 
-```cs
+```xaml
 
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -230,7 +233,7 @@ MainPage.xaml内の
 
 を
 
-```cs
+```xaml
 
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
@@ -309,7 +312,7 @@ namespace helloxamarin
 
 MainPage.xamlに以下のようになるように編集します.
 
-``` MainPage.xaml
+```xaml
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -319,14 +322,14 @@ MainPage.xamlに以下のようになるように編集します.
   <StackLayout>
     <Entry /> <!-- Added  -->
     <Button x:Name="Button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
-    <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+    <Label x:Name="Label" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
   </StackLayout>
 </ContentPage>
 ```
 
 さらにC#コード側から操作できるようにコンポーネントに名前をつけます.ここでは`Entry`という名前をつけることにします。
 
-``` MainPage.xaml
+```xaml
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -336,7 +339,7 @@ MainPage.xamlに以下のようになるように編集します.
   <StackLayout>
     <Entry x:Name="Entry" /> <!-- Added  -->
     <Button x:Name="Button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
-    <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+    <Label x:Name="Label" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
   </StackLayout>
 </ContentPage>
 ```
@@ -345,7 +348,7 @@ MainPage.xamlに以下のようになるように編集します.
 
 Androidの場合はこんな感じになるはずです。
 
-図 Android Debug
+![img](./img/2/1.png)  
 
 
 ## 2. エントリに入力された文字を取得する
@@ -353,9 +356,9 @@ Androidの場合はこんな感じになるはずです。
 続けてエントリに入力された文字列を取得します。
 ここではここでは実際に取得できたことを確認するため、`ボタン`を押すと、`エントリ`に入力された文字が`ラベル`に表示される物を作ります。
 
-ボタンのクリックイベントが起きた時に呼び出される`button_Click`メソッドを変更します。
+ボタンのクリックイベントが起きた時に呼び出される`Button_Clicked`メソッドを変更します。
 
-```MainPage.xaml.cs
+```cs
 private async void Button_ClickedAsync(object sender, EventArgs e)
 {
     var name = this.Entry.Text;
@@ -368,7 +371,7 @@ private async void Button_ClickedAsync(object sender, EventArgs e)
 
 そしてコンストラクタに変更を加えます。
 
-```MainPage.xaml.cs
+```cs
 public MainPage()
 {
     InitializeComponent();
@@ -380,6 +383,8 @@ public MainPage()
 こうすることでエントリに入力された文字列がラベル上に表示されます。
 
 この状態でアプリケーションを立ち上げ、エントリに文字を入力しボタンを押すと図のようにラベルに同じ文字が表示されます。
+
+![img](./img/2/2.png)  
 
 ## 3. GithubのAPIを呼び出す
 次は実際にGithubのAPIを呼び出し、指定したユーザのリポジトリ一覧を取得します。
@@ -394,7 +399,7 @@ public MainPage()
 
 まずはMainPage.xaml.csにGithubのAPIを呼び出し、呼び出した結果を取得するメソッドを作成します。
 
-```MainPage.xaml.cs
+```cs
 public async Task<string> GetGithubRepos(string userName)
 {
     /*これから実装*/
@@ -406,7 +411,7 @@ UWPの発展課題に挑戦した方ならお気づきだと思いますが、Gi
 
 今回はネットワーク等結果が得られるか不確定な部分があるので、try-catchという手法を用います。
 
-```MainPage.xaml.cs
+```cs
 try
 {
 
@@ -421,7 +426,7 @@ catch(Exception e)
 
 次にHttpClientクラスのインスタンスを作成し設定を行います。HttpClientは処理が終わったらきちんと解放したいためusingブロックを用います。
 これを用いることで処理が終わった後に自動的にCloseしてくれます。
-```MainPage.xaml.cs
+```cs
 using(httpClient = new HttpClient())
 {
   httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
@@ -430,25 +435,26 @@ using(httpClient = new HttpClient())
 GithubのAPIではHTTPヘッダにユーザエージェントを指定することが必須となっているため、3行目にてその設定を行っています。
 
 次にURLを作成します。
-```MainPage.xaml.cs
+```cs
 var url = string.Format("https://api.github.com/users/{0}/repos", userName);
 ```
 
 文字列結合の方法は複数存在しますが今回はstring.Formatを使用します。
 そしてにGetStringAsyncメソッドを用いて結果を取得します。
 
-```MainPage.xaml.cs
+```cs
 return await httpClient.GetStringAsync(url);
 ```
 
 最後にエラーが発生した場合にエラーメッセージを表示したいのでcatchブロックの中に以下を記述します。
 
-```MainPage.xaml.cs
+```cs
 await DisplayAlert("Error", e.ToString(), "OK");
 ```
 
 ここまでをまとめるとGetGithubReposメソッドは以下のようになります。
-```MainPage.xaml.cs
+
+```cs
 public async Task<string> GetGithubRepos(string userName)
 {                                  
     try
@@ -465,11 +471,10 @@ public async Task<string> GetGithubRepos(string userName)
         await DisplayAlert("Error", e.ToString(), "OK");       
     }   
 }
-
 ```
 このメソッドを先程修正したButton_ClickedAsyncメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧を含むjsonがテキストブロックに表示されます。
 
-```MainPage.xaml.cs
+```cs
 private async void Button_ClickedAsync(object sender, EventArgs e)
 {
     var name = this.Entry.Text;
