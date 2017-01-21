@@ -238,7 +238,7 @@ MainPage.xaml内の
 
 変更したことによって以下のような画像になります。
 
-![xaml画像ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E7%94%BB%E5%83%8F%E3%83%93%E3%83%AB%E3%83%89.png)
+![xaml画像ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/xamarin%E4%BF%AE%E6%AD%A3.png)
 
 ## 2.3 ボタンを押したときにラベルを変化させよう！
 
@@ -276,7 +276,7 @@ namespace helloxamarin
 
 コードの記入ができたら実行してみましょう
 
-![xamlラベル変更ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E3%83%A9%E3%83%99%E3%83%AB%E5%A4%89%E6%9B%B4%E7%94%BB%E9%9D%A2.png)
+![xamlラベル変更ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/xamarin%E4%BF%AE%E6%AD%A3%E7%B5%90%E6%9E%9C.png)
 
 上の画像はクリックした結果になります。
 
