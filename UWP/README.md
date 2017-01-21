@@ -525,7 +525,7 @@ private async void button_Click(object sender, RoutedEventArgs e)
 このこまで実装した状態で、実行し、テキストボックスにGithubのユーザー名を入力してボタンを押すと以下のようになります。  
 ![img](./img/2/3.png)
 
-なお、ユーザーが見つからない場合は何も表示されなかったり以下のように例外が表示されます。  
+なお、ユーザーが見つからない場合やネットワークにつながっていない場合は以下のように例外が表示されます。  
 ![img](./img/2/4.png)  
 
 例外処理についてはここでは扱わないものとしますが、実際のアプリケーションを開発する場合は例外処理をする必要があります。  
@@ -730,13 +730,13 @@ public void SetListData(string data) {
 ```
 
 つづけてGithubRepoの配列から1つずつ要素を取り出し、適当な情報をリストのItemsに追加します。  
-ここではurlを表示することにします。  
+ここでは名前を表示することにします。  
 
 ```cs
 public void SetListData(string data) {
     /*略*/
     foreach (var src in sources) {             
-        this.RepoList.Items.Add(src.Url);
+        this.RepoList.Items.Add(src.Name);
     }
 }
 ```
@@ -751,8 +751,9 @@ private async void button_Click(/*略*/)
 }
 ```
 
-これでボタンを押すとGithubのAPIを呼び出しjsonを取得、取得したjsonをGithubRepoクラスに変換し、リポジトリの情報（ここではUrl）を取り出しリストに表示する　までができました。  
+これでボタンを押すとGithubのAPIを呼び出しjsonを取得、取得したjsonをGithubRepoクラスに変換し、リポジトリの情報（ここではName）を取り出しリストに表示する　までができました。  
 
 この状態で実行すると図のようになります。  
+
 
 ![img](./img/3/10.png)
