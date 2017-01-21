@@ -193,13 +193,11 @@ TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更
              xmlns:local="clr-namespace:helloxamarin"
              x:Class="helloxamarin.MainPage"
              Title="Hello world">
-<StackLayout>
+   <Label Text="Hello World!"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            TextColor="Blue" FontSize="Medium" />
 
-  <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
-  <Label x:Name="labelHelloWorld" Text="Change??"  TextColor="Blue" FontSize="Medium"
-         VerticalOptions="Center"        
-         HorizontalOptions="Center"/>
-  </StackLayout>
 
 </ContentPage>
 
@@ -208,7 +206,7 @@ TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更
 
 これで起動してみましょう。
 
-![文字色変更](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/%E6%96%87%E5%AD%97%E8%89%B2%E5%A4%89%E6%9B%B4.png)
+![文字色変更](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/HelloWorld%E4%BF%AE%E6%AD%A3.png)
 
 ### 2.2 ボタンとラベルを配置してみよう！
 
@@ -240,9 +238,10 @@ MainPage.xaml内の
              xmlns:local="clr-namespace:helloxamarin"
              x:Class="helloxamarin.MainPage"
              Title="Hello world">
+
   <StackLayout>
-    <Button x:Name="Button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
-    <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+    <Button x:Name="Button" Text="Button" />
+    <Label x:Name="Label" Text="Change??" TextColor="Blue" FontSize="Medium"/>
   </StackLayout>
 
 </ContentPage>
@@ -253,39 +252,45 @@ MainPage.xaml内の
 
 変更したことによって以下のような画像になります。
 
-![xaml画像ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E7%94%BB%E5%83%8F%E3%83%93%E3%83%AB%E3%83%89.png)
+![xaml画像ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/xamarin%E4%BF%AE%E6%AD%A3.png)
 
 ### 2.3 ボタンを押したときにラベルを変化させよう！
 
 MainPage.xaml.csを編集していきます。
 以下のように編集しましょう
 
-![Mainpage.xamal.cs編集画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/master/Xamarin/img/Mainpage.xaml.cs%E7%B7%A8%E9%9B%86%E7%94%BB%E9%9D%A2.PNG)
 
-上の画像はこのコードを追加したものです。
 
 ```cs
-button.Clicked += (sender, e) =>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace helloxamarin
 {
-    this.labelHelloWorld.Text = "Hello World!";
-};
+	public partial class MainPage : ContentPage
+	{
+    public MainPage()
+		{
+        InitializeComponent();
+            this.Button.Clicked += Button_Clicked;
+        }
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            this.Label.Text = "Hello World!";
+        }
+    }
+}
+
 
 ```
-
-上記の式はラムダ式と呼ばれるもので
-
-```
-
-(引数1, 引数2...) => 式
-
-```
-
-で定義されるものでプログラムの書き方のひとつになります。
-
 
 コードの記入ができたら実行してみましょう
 
-![xamlラベル変更ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E3%83%A9%E3%83%99%E3%83%AB%E5%A4%89%E6%9B%B4%E7%94%BB%E9%9D%A2.png)
+![xamlラベル変更ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/xamarin%E4%BF%AE%E6%AD%A3%E7%B5%90%E6%9E%9C.png)
 
 上の画像はクリックした結果になります。
 
