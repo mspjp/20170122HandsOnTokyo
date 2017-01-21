@@ -7,11 +7,11 @@ using Xamarin.Forms;
 
 namespace helloxamarin
 {
-	public partial class MainPage : ContentPage
-	{
-    public MainPage()
-		{
-        InitializeComponent();
+    public partial class MainPage : ContentPage
+    {
+        public MainPage()
+        {
+            InitializeComponent();
             this.Button.Clicked += Button_Clicked;
         }
         private void Button_Clicked(object sender, EventArgs e)

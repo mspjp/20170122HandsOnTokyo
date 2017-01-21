@@ -176,13 +176,11 @@ TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更
              xmlns:local="clr-namespace:helloxamarin"
              x:Class="helloxamarin.MainPage"
              Title="Hello world">
-<StackLayout>
+   <Label Text="Hello World!"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            TextColor="Blue" FontSize="Medium" />
 
-  <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
-  <Label x:Name="labelHelloWorld" Text="Change??"  TextColor="Blue" FontSize="Medium"
-         VerticalOptions="Center"        
-         HorizontalOptions="Center"/>
-  </StackLayout>
 
 </ContentPage>
 
@@ -227,7 +225,7 @@ MainPage.xaml内の
   <StackLayout>
 
   <Button x:Name="Button" Text="Button" />
-  <Label x:Name="Label" Text="Change??"/>
+  <Label x:Name="Label" Text="Change??" TextColor="Blue" FontSize="Medium"/>
   </StackLayout>
 
 </ContentPage>
