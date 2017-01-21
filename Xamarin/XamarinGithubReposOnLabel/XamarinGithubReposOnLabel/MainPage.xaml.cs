@@ -20,7 +20,7 @@ namespace XamarinGithubReposOnLabel
         private async void Button_ClickedAsync(object sender, EventArgs e)
         {
             var name = this.Entry.Text;
-            var result = await GetGithubRepos(name); // またこれ
+            var result = await GetGithubRepos(name); 
             this.Label.Text = result;
         }
 
