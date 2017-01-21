@@ -189,7 +189,7 @@ TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更
 
 これで起動してみましょう。
 
-![文字色変更](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/%E6%96%87%E5%AD%97%E8%89%B2%E5%A4%89%E6%9B%B4.png)
+![文字色変更](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/HelloWorld%E4%BF%AE%E6%AD%A3.png)
 
 ## 2.2 ボタンとラベルを配置してみよう！
 
