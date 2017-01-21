@@ -71,7 +71,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 なのでコードを直接記述してレイアウトの編集を行っていきます。
 
 
-## 2.1 初期に作られたコードを理解しよう！
+### 2.1 初期に作られたコードを理解しよう！
 
 まずはMainPage.xamlのコードを見てみましょう
 
@@ -115,7 +115,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 ここから色々と変えていきましょう
 
-## 2.2 ボタンとラベルを配置してみよう！
+### 2.2 ボタンとラベルを配置してみよう！
 
 MainPage.xaml内の
 
@@ -161,7 +161,7 @@ MainPage.xaml内の
 
 ![xaml画像ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E7%94%BB%E5%83%8F%E3%83%93%E3%83%AB%E3%83%89.png)
 
-## 2.3 ボタンを押したときにラベルを変化させよう！
+### 2.3 ボタンを押したときにラベルを変化させよう！
 
 MainPage.xaml.csを編集していきます。
 以下のように編集しましょう
@@ -199,3 +199,74 @@ button.Clicked += (sender, e) =>
 クリックしてラベルの文字が変更されれば成功です。
 
 何かエラーが発生した場合はメンターに質問してください。
+
+
+# 発展課題1 Githubのリポジトリ一覧をラベルに表示する
+昨今のアプリケーションではインターネットが当たり前となり、ネットからデータを取得したり、サーバとやり取りを行うことが少なくありません。
+この課題ではその一例として「ボタン」を押すと、GithubのAPIと接続し「エントリ」で指定したユーザのリポジトリ一覧を「ラベル」に表示するものを作成します。
+
+
+## 1. エントリの追加
+基本課題にコンポーネントを追加していきます。
+今回は文字入力を行う事ができるコンポーネントであるエントリ(Entry)を追加します。
+
+MainPage.xamlに以下のようになるように編集します.
+
+``` MainPage.xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:helloxamarin"
+             x:Class="helloxamarin.MainPage"
+             Title="Hello world">
+  <StackLayout>
+    <Entry /> <!-- Added  -->
+    <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+  </StackLayout>
+</ContentPage>
+```
+
+さらにC#コード側から操作できるようにコンポーネントに名前をつけます.ここでは`Entry`という名前をつけることにします。
+
+``` MainPage.xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:helloxamarin"
+             x:Class="helloxamarin.MainPage"
+             Title="Hello world">
+  <StackLayout>
+    <Entry x:Name="Entry" /> <!-- Added  -->
+    <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+  </StackLayout>
+</ContentPage>
+```
+
+余裕があればプロパティを変更して自分好みのUIに仕上げましょう!
+
+Androidの場合はこんな感じになるはずです。
+
+図 Android Debug
+
+
+## 2. エントリに入力された文字を取得する
+
+続けてエントリに入力された文字列を取得します。
+ここではここでは実際に取得できたことを確認するため、`ボタン`を押すと、`エントリ`に入力された文字が`ラベル`に表示される物を作ります。
+
+ボタンのクリックイベントが起きた時に呼び出される`button_Click`メソッドの中身を変更します。
+
+```MainPage.xaml
+
+```
+
+
+
+
+
+
+
+
+
