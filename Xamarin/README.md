@@ -44,10 +44,10 @@ Windows10のどのバージョン向けにプロジェクトを作成するか�
 
 作成が成功したらNuGetの更新をしましょう
 プロジェクト名.UWPを右クリックしてNuGet パッケージの管理を選択しましょう
-![](NuGet管理)
+![img](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/NuGet%E7%AE%A1%E7%90%86.png)
 
 ここでおそらく更新プログラムにXamarin.Formsがあると思いますので選択して更新しましょう！
-![](NuGet更新)
+![img](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/NuGet%E6%9B%B4%E6%96%B0PNG_LI.jpg)
 
 
 正しく生成、更新できたか確認するために一旦ビルドしましょう。
@@ -162,7 +162,7 @@ TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更
 
 これで起動してみましょう。
 
-![文字色変更]()
+![文字色変更](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/%E6%96%87%E5%AD%97%E8%89%B2%E5%A4%89%E6%9B%B4.png)
 
 ## 2.2 ボタンとラベルを配置してみよう！
 
@@ -194,7 +194,7 @@ MainPage.xaml内の
              xmlns:local="clr-namespace:helloxamarin"
              x:Class="helloxamarin.MainPage"
              Title="Hello world">
-<StackLayout>
+  <StackLayout>
 
   <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
   <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
