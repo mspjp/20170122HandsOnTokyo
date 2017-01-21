@@ -247,3 +247,28 @@ button.Clicked += (sender, e) =>
 クリックしてラベルの文字が変更されれば成功です。
 
 何かエラーが発生した場合はメンターに質問してください。
+
+# Macの方へandroidでのビルド
+
+Macの方はxamarinstudioで進めているため、Xamarin.UWPファイルが存在せず、
+
+ローカルPCでの起動ができないためandroidで起動しましょう
+
+xamarinstudioでのXamarinForms作成方法は以下の通りになります。
+
+まずはxamarinstudioを起動してください
+
+そして下記画像のように
+
+新しいソリューション => Multiplatform => Forms Appを選択してください
+
+![Formapp]()
+
+作成ができたら以下のような画像のようなファイル構成でソリューションが作られます
+
+![Macファイル]()
+
+作成できましたら以下の画像のように左上の部分を変更してください
+Xamarin.Droid > Debug > Androidエミュレーター or 実機
+
+![Android]()
