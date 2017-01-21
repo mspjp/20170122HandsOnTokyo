@@ -52,10 +52,9 @@ Windows10のどのバージョン向けにプロジェクトを作成するか�
 
 正しく生成、更新できたか確認するために一旦ビルドしましょう。
 
-Windowsの方は下記の画像のようにビルドの設定を変えましょう
+画像のようにビルドの設定を変えましょう
 ![xamarinForms初期ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xamarin%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89.jpg)
 
-Macの方は下記の画像のようにビルドの設定を変えましょう
 
 変更できたらローカルコンピューターの左にある矢印を押して実行しましょう
 
