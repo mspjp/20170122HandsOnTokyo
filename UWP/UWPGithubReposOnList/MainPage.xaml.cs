@@ -36,42 +36,26 @@ namespace UWPGithubReposOnList
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new MessageDialog("Get Github repos", "Get Github repos");      // 直接叩きに行く or EditableBlock作ってもいいかも?
-            await dialog.ShowAsync();
-            var result = await GetGithubRepos("mizune");
+            var name = this.UserName.Text;
+            var result = await GetGithubRepos(name);
             SetListData(result);
-
-
         }
 
-        public async void SetListData(string data)
+        public void SetListData(string data)
         {
             var sources = JsonConvert.DeserializeObject<List<GithubRepo>>(data);
-            Debug.WriteLine("Deserialized object");
-            var list = new List<string>();
-            sources.ForEach(x =>
-            {
-                list.Add(x.Url);
-            });
-
-            // var res = from x in sources select x.Url;
-            foreach (var url in list)
+            
+            foreach (var src in sources)
             {             
-                this.RepoList.Items.Add(url);
+                this.RepoList.Items.Add(src.Url);
             }
-
         }
 
-        public async Task<string> GetGithubRepos(string userName) // or not WebClientは使えない
-        {
+        public async Task<string> GetGithubRepos(string userName) {
+            var url = string.Format("https://api.github.com/users/{0}/repos", userName);
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
-            // Debug.WriteLine(string.Format("https://api.github.com/users/{0}/repos"));
-
-            return await httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos", userName));
-
-            // this.label.Text = result;
-
+            return await httpClient.GetStringAsync(url);
         }
     }
 }

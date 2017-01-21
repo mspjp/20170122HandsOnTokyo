@@ -33,7 +33,7 @@ UWP編のフォルダーには以下のものが含まれています。
 
 ![img](./img/1-1/3.png)  
 
-名前は任意ですが、ここではUWPHnadsonとします。
+名前は任意ですが、ここではUWPHandsonとします。
 
 内容を確認し、問題なければ「OK」ボタンを押します。
 
@@ -228,8 +228,13 @@ UIの設計にはXAMLのコードを直接記述する方法とグラフィカ�
 <TextBlock Text="テスト" Foreground="Red" Margin="10, 40, 0, 0" VerticalAlignment="Top"></TextBlock>
 ```
 
-ここまで行い実行すると以下のようになります。  
+変更前  
 ![img](./img/1-2/13.png)  
+変更後  
+![img](./img/1-2/14.png)  
+
+ここまで行い実行すると以下のようになります。  
+![img](./img/1-2/15.png)  
 
 >## メモ
 >XAMLに記述する要素の順番には意味があります。  
@@ -268,7 +273,8 @@ UIパーツはそれぞれが例えば押された、マウスが乗った、キ
 ボタンが押された、マウスが乗ったなどのイベントが起きたときに行う処理（イベントハンドラー）を追加します。  
 まず、現在編集しているMainPage.xamlに関連付けられたC#のコード MainPage.xaml.csを開きます。  
 
-![img](./img/1-3/1.png)
+![img](./img/1-3/1.png)  
+![img](./img/1-3/2.png)
 
 開くとthis.InitializeComponent();を呼び出しているだけのコンストラクターがあります。  
 InitializeComponent()はXAMLから自動生成されたコードの中で定義されています。  
@@ -319,17 +325,16 @@ ShowAsyncは非同期なメソッドなのでawaitをつけてダイアログを
 
 上記のコードを追加してもnew MessageDialog付近に赤下線がでてきます。
 
-![img](./img/1-3/2.png)  
+![img](./img/1-3/3.png)  
 
 下線の上にマウスカーソルを持っていくとヒントボタンが出てくるのでusing Windows.UI.Popups;を選択します。  
 
-![img](./img/1-3/3.png)  
 ![img](./img/1-3/4.png)  
+![img](./img/1-3/5.png)  
 
 これはC言語のincludeに相当するものです。  
 
 この段階で実行しボタンを押してみると図のようにダイアログが表示されます。  
-![img](./img/1-3/5.png)  
 
 ![img](./img/1-3/6.png)
 
@@ -452,7 +457,9 @@ https://api.github.com/users/ユーザー名/repos
       "id": 19600008,
 以下略
 ```
-のようにjson形式で応答が帰ってきます。  
+のようにjson形式で応答が帰ってきます。 
+
+参考 json [Wikipedia](https://ja.wikipedia.org/wiki/JavaScript_Object_Notation) 
 
 今回はGithubのAPIサーバーを呼び出すのにHttpClientクラスを利用します。  
 このクラスはブラウザのようにHTTPサーバーに接続し、データを受信できるクラスです。  
@@ -471,7 +478,7 @@ public async Task<string> GetGithubRepos(string userName) {
 (GetGithubReposの赤波線はreturn指定内から出ているだけです。あとで実装するので放置です。)  
 
 まず、URLを作成します。  
-https://api.github.com/users/ユーザー名/reposのユーザー名を引数のuserNameにします。  
+https://api.github.com/users/ユーザー名/repos のユーザー名を引数のuserNameにします。  
 置換や文字列の結合など実装方法は複数ありますが、ここではstring.Formatを利用します。  
 
 ```cs
@@ -504,7 +511,7 @@ public async Task<string> GetGithubRepos(string userName) {
 }
 ```
 
-このメソッドを先程修正したbutton_Clickメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧がテキストブロックに表示されます。  
+このメソッドを先程修正したbutton_Clickメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧を含むjsonがテキストブロックに表示されます。  
 
 ```cs
 private async void button_Click(object sender, RoutedEventArgs e)
@@ -518,8 +525,234 @@ private async void button_Click(object sender, RoutedEventArgs e)
 このこまで実装した状態で、実行し、テキストボックスにGithubのユーザー名を入力してボタンを押すと以下のようになります。  
 ![img](./img/2/3.png)
 
-なお、ユーザーが見つからない場合は以下のように表示されます。  
-![img](./img/2/3.png)
+なお、ユーザーが見つからない場合は何も表示されなかったり以下のように例外が表示されます。  
+![img](./img/2/4.png)  
+
+例外処理についてはここでは扱わないものとしますが、実際のアプリケーションを開発する場合は例外処理をする必要があります。  
+
+例外処理の方法については[こちら](http://dobon.net/vb/dotnet/beginner/exceptionhandling.html)を御覧ください。  
 
 # 発展課題2
+発展課題2では発展課題1で取得したGithubAPIの応答を加工し一覧表示（List）をします。
 
+## 1. ライブラリの導入
+取得したjsonをC#のオブジェクトに変換するため、Json.netというライブラリを導入します。  
+
+Json.netを利用したjsonからC#のオブジェクトに変換する方法として複数の方法がありますが、ここでは自作クラスに変換する方法を用います。  
+
+json.netについては[こちら](http://www.newtonsoft.com/json)を御覧ください。  
+
+ライブラリの導入にはnugetというパッケージマネージャーを利用します。  
+
+プロジェクトを右クリックし「NuGetパッケージの管理(N)」を選択します。  
+![img](./img/3/1.png)  
+
+次に「参照」を選択し検索ボックスに「Json.net」と入力します。  
+![img](./img/3/2.png)  
+
+「Newtonsoft.Json」を選択し「インストール」を選択します。  
+![img](./img/3/3.png)  
+
+インストールするプロジェクトの名前を確認して「OK」を選択します。  
+![img](./img/3/4.png)  
+
+出力に正常にインストールされましたと表示されれば完了です。  
+![img](./img/3/5.png)  
+
+## 2. 取得したjsonデータをC#のオブジェクトに変換
+
+次に、json構造と同じ内容のC#のクラスを作成します。  
+jsonの構造に合わせて同じ名前、型を決めて定義します。  
+
+クラスの作成はプロジェクトを右クリックし「追加(D)」から「新しい項目(W)」を選択します。  
+![img](./img/3/6.png)  
+
+「クラス」を選択し、クラス名を入力します。  
+ここではGithubRepos.csとして作成しました。  
+![img](./img/3/7.png)  
+
+内容は以下のようにします。  
+
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace UWPHandson
+{
+
+    public class Owner
+    {
+        public string Login { get; set; }
+        public int Id { get; set; }
+        public string AvatarUrl { get; set; }
+        public string GravatarId { get; set; }
+        public string Url { get; set; }
+        public string HtmlUrl { get; set; }
+        public string FollowersUrl { get; set; }
+        public string FollowingUrl { get; set; }
+        public string GistsUrl { get; set; }
+        public string StarredUrl { get; set; }
+        public string SubscriptionsUrl { get; set; }
+        public string OrganizationsUrl { get; set; }
+        public string ReposUrl { get; set; }
+        public string EventsUrl { get; set; }
+        public string ReceivedEventsUrl { get; set; }
+        public string Type { get; set; }
+        public bool SiteAdmin { get; set; }
+    }
+
+    public class GithubRepo
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string FullName { get; set; }
+        public Owner Owner { get; set; }
+        public bool Private { get; set; }
+        public string HtmlUrl { get; set; }
+        public string Description { get; set; }
+        public bool Fork { get; set; }
+        public string Url { get; set; }
+        public string ForksUrl { get; set; }
+        public string KeysUrl { get; set; }
+        public string CollaboratorsUrl { get; set; }
+        public string TeamsUrl { get; set; }
+        public string HooksUrl { get; set; }
+        public string IssueEventsUrl { get; set; }
+        public string EventsUrl { get; set; }
+        public string AssigneesUrl { get; set; }
+        public string BranchesUrl { get; set; }
+        public string TagsUrl { get; set; }
+        public string BlobsUrl { get; set; }
+        public string GitTagsUrl { get; set; }
+        public string GitRefsUrl { get; set; }
+        public string TreesUrl { get; set; }
+        public string StatusesUrl { get; set; }
+        public string LanguagesUrl { get; set; }
+        public string StargazersUrl { get; set; }
+        public string ContributorsUrl { get; set; }
+        public string SubscribersUrl { get; set; }
+        public string SubscriptionUrl { get; set; }
+        public string CommitsUrl { get; set; }
+        public string GitCommitsUrl { get; set; }
+        public string CommentsUrl { get; set; }
+        public string IssueCommentUrl { get; set; }
+        public string ContentsUrl { get; set; }
+        public string CompareUrl { get; set; }
+        public string MergesUrl { get; set; }
+        public string ArchiveUrl { get; set; }
+        public string DownloadsUrl { get; set; }
+        public string IssuesUrl { get; set; }
+        public string PullsUrl { get; set; }
+        public string MilestonesUrl { get; set; }
+        public string NotificationsUrl { get; set; }
+        public string LabelsUrl { get; set; }
+        public string ReleasesUrl { get; set; }
+        public string DeploymentsUrl { get; set; }
+        public string CreatedAt { get; set; }
+        public string UpdatedAt { get; set; }
+        public string PushedAt { get; set; }
+        public string GitUrl { get; set; }
+        public string SshUrl { get; set; }
+        public string CloneUrl { get; set; }
+        public string SvnUrl { get; set; }
+        public string Homepage { get; set; }
+        public int Size { get; set; }
+        public int StargazersCount { get; set; }
+        public int WatchersCount { get; set; }
+        public string Language { get; set; }
+        public bool HasIssues { get; set; }
+        public bool HasDownloads { get; set; }
+        public bool HasWiki { get; set; }
+        public bool HasPages { get; set; }
+        public int ForksCount { get; set; }
+        public object MirrorUrl { get; set; }
+        public int OpenIssuesCount { get; set; }
+        public int Forks { get; set; }
+        public int OpenIssues { get; set; }
+        public int Watchers { get; set; }
+        public string DefaultBranch { get; set; }
+    }
+
+}
+```
+
+続けてjsonオブジェクトからGithubRepoの配列に変換します。  
+MainPage.xaml.csを開き、変換できるかどうかを確認するため、ボタンクリック時に呼び出されるbutton_Clickメソッド内でたしかめます。  
+
+```cs
+private async void button_Click(/*略*/) {
+    /*略*/
+    var sources = JsonConvert.DeserializeObject<List<GithubRepo>>(result);
+}
+```
+
+最後に変換されたかどうかをデバッガーを利用し確認します。  
+
+var sourcesの行にブレークポイントを配置し実行します。  
+![img](./img/3/8.png)  
+
+ブレークポイントにヒットしたあとはステップオーバーをクリックし、1行進めたところでsourcesにマウスカーソルを載せると変数の中身を見ることができます。  
+![img](./img/3/9.png)
+
+ブレークポイント配置、デバッグ方法、変数の見方などは[こちら](https://github.com/mspjp/201612hackathonyokohama/blob/master/csharp/DEBUG.md)を御覧ください。  
+
+確認できたあとはbutton_Clickに追加した確認用のコードは削除してください。
+
+## 2. リスト形式で表示
+続けて、MainPage.xamlを開き、一覧表示を行うリスト(ListView)を追加します。 
+また、TextBlockは削除してください。   
+
+```xaml
+<ListView x:Name="RepoList" HorizontalAlignment="Stretch" Margin="0,0,0,100" VerticalAlignment="Stretch"/>
+```
+
+ここではRepoListと名前をつけました。  
+
+ListViewはItemsに要素を追加したり、Xaml上で子に要素を追加すると一列に並べて表示されます。  
+
+続けてMainPage.csに戻り、Labelに関する行を削除し、jsonの文字列からGithubRepoクラスに変換し、RepoListに要素を追加するメソッドを追加します。  
+
+```cs
+public void SetListData(string data) {
+    /* これから実装 */
+}
+```
+
+まずは、引数として渡されたjson文字列からGithubRepoクラスの配列に変換します。  
+
+```cs
+public void SetListData(string data) {
+    var sources = JsonConvert.DeserializeObject<List<GithubRepo>>(data);
+}
+```
+
+つづけてGithubRepoの配列から1つずつ要素を取り出し、適当な情報をリストのItemsに追加します。  
+ここではurlを表示することにします。  
+
+```cs
+public void SetListData(string data) {
+    /*略*/
+    foreach (var src in sources) {             
+        this.RepoList.Items.Add(src.Url);
+    }
+}
+```
+
+最後に作成したメソッドをボタンが押され、GithubのAPIの応答が帰ってきたあとの部分で呼び出します。   
+
+```cs
+private async void button_Click(/*略*/)
+{
+    /*略*/
+    SetListData(result);
+}
+```
+
+これでボタンを押すとGithubのAPIを呼び出しjsonを取得、取得したjsonをGithubRepoクラスに変換し、リポジトリの情報（ここではUrl）を取り出しリストに表示する　までができました。  
+
+この状態で実行すると図のようになります。  
+
+![img](./img/3/10.png)
