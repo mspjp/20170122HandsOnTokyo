@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:helloxamarin"
              x:Class="helloxamarin.MainPage"
              Title="Hello world">
-<StackLayout>
+  <StackLayout>
 
   <Button x:Name="Button" Text="Button" />
   <Label x:Name="Label" Text="Change??"  TextColor="Blue" FontSize="Medium"/>

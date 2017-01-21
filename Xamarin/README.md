@@ -223,13 +223,14 @@ MainPage.xaml内の
              xmlns:local="clr-namespace:helloxamarin"
              x:Class="helloxamarin.MainPage"
              Title="Hello world">
+
   <StackLayout>
 
-  <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
-  <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+  <Button x:Name="Button" Text="Button" />
+  <Label x:Name="Label" Text="Change??"/>
   </StackLayout>
 
-</ContentPage>]
+</ContentPage>
 
 ```
 
@@ -244,28 +245,34 @@ MainPage.xaml内の
 MainPage.xaml.csを編集していきます。
 以下のように編集しましょう
 
-![Mainpage.xamal.cs編集画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/master/Xamarin/img/Mainpage.xaml.cs%E7%B7%A8%E9%9B%86%E7%94%BB%E9%9D%A2.PNG)
 
-上の画像はこのコードを追加したものです。
 
 ```cs
-button.Clicked += (sender, e) =>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace helloxamarin
 {
-    this.labelHelloWorld.Text = "Hello World!";
-};
+	public partial class MainPage : ContentPage
+	{
+    public MainPage()
+		{
+        InitializeComponent();
+            this.Button.Clicked += Button_Clicked;
+        }
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            this.Label.Text = "Hello World!";
+        }
+    }
+}
+
 
 ```
-
-上記の式はラムダ式と呼ばれるもので
-
-```
-
-(引数1, 引数2...) => 式
-
-```
-
-で定義されるものでプログラムの書き方のひとつになります。
-
 
 コードの記入ができたら実行してみましょう
 
