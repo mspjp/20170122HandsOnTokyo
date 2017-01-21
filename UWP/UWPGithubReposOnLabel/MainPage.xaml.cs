@@ -32,7 +32,6 @@ namespace UWPGithubReposOnLabel
             this.InitializeComponent();
             this.Button.Click += button_Click;
         }
-
         private async void button_Click(object sender, RoutedEventArgs e) {
             var name = this.UserName.Text;
             var result = await GetGithubRepos(name);
@@ -44,6 +43,7 @@ namespace UWPGithubReposOnLabel
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
             return await httpClient.GetStringAsync(url);
+
         }
     }
 }

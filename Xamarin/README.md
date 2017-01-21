@@ -42,7 +42,15 @@ Windows10のどのバージョン向けにプロジェクトを作成するか�
 
 このような画面が作成されればプロジェクトの作成は成功です。
 
-正しく生成できたか確認するために一旦ビルドしましょう。
+作成が成功したらNuGetの更新をしましょう
+プロジェクト名.UWPを右クリックしてNuGet パッケージの管理を選択しましょう
+![img](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/NuGet%E7%AE%A1%E7%90%86.png)
+
+ここでおそらく更新プログラムにXamarin.Formsがあると思いますので選択して更新しましょう！
+![img](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/NuGet%E6%9B%B4%E6%96%B0PNG_LI.jpg)
+
+
+正しく生成、更新できたか確認するために一旦ビルドしましょう。
 
 下記の画像のようにビルドの設定を変えましょう
 ![xamarinForms初期ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xamarin%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89.jpg)
@@ -51,6 +59,35 @@ Windows10のどのバージョン向けにプロジェクトを作成するか�
 
 このような実行結果が得られたらひとまず成功です。
 ![初期ビルド成功](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89%E6%88%90%E5%8A%9F.PNG)
+
+# Macの方へandroidでのビルド
+
+Macの方はxamarinstudioで進めているため、Xamarin.UWPファイルが存在せず、
+
+ローカルPCでの起動ができないためandroidで起動しましょう
+
+xamarinstudioでのXamarinForms作成方法は以下の通りになります。
+
+まずはxamarinstudioを起動してください
+
+そして下記画像のように
+
+新しいソリューション => Multiplatform => Forms Appを選択してください
+
+![Formapp](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Formsappp.png)
+
+作成ができたら以下のような画像のようなファイル構成でソリューションが作られます
+
+![Macファイル](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Mac%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png)
+
+作成できましたら以下の画像のように左上の部分を変更してください
+Xamarin.Droid > Debug > Androidエミュレーター or 実機
+
+![Android](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Macandroid%E8%B5%B7%E5%8B%95_Ink_LI.jpg)
+
+上記画像のようにビルド成功してエミュレータが起動できれば成功です。（上記画像はPCのメモリが足りずアプリの画面まではいけてないのですがビルドは成功しています）
+
+後はWindowsと同じファイルを編集していくことになりますので引き続き作業を進めてください。
 
 ## 2.画面をデザインしよう
 
@@ -115,6 +152,47 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 ここから色々と変えていきましょう
 
+文字の色を変えてみよう！
+
+MainPage.xaml.cs内のLabel x:Name内に
+
+```cs
+
+ TextColor="Blue" FontSize="Medium"
+
+```
+
+を追加してみましょう
+
+TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更できます。自身で好きな値に変更してもらっても大丈夫です。
+
+追加した結果のコードは以下のようになります
+
+```cs
+
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:helloxamarin"
+             x:Class="helloxamarin.MainPage"
+             Title="Hello world">
+<StackLayout>
+
+  <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label x:Name="labelHelloWorld" Text="Change??"  TextColor="Blue" FontSize="Medium"
+         VerticalOptions="Center"        
+         HorizontalOptions="Center"/>
+  </StackLayout>
+
+</ContentPage>
+
+
+```
+
+これで起動してみましょう。
+
+![文字色変更](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/%E6%96%87%E5%AD%97%E8%89%B2%E5%A4%89%E6%9B%B4.png)
+
 ### 2.2 ボタンとラベルを配置してみよう！
 
 MainPage.xaml内の
@@ -166,12 +244,11 @@ MainPage.xaml内の
 MainPage.xaml.csを編集していきます。
 以下のように編集しましょう
 
-![Mainpage.xamal.cs編集画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/Xaml%E9%96%8B%E3%81%84%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89.PNG)
+![Mainpage.xamal.cs編集画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/master/Xamarin/img/Mainpage.xaml.cs%E7%B7%A8%E9%9B%86%E7%94%BB%E9%9D%A2.PNG)
 
 上の画像はこのコードを追加したものです。
 
 ```cs
-
 button.Clicked += (sender, e) =>
 {
     this.labelHelloWorld.Text = "Hello World!";
