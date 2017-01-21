@@ -42,7 +42,15 @@ Windows10のどのバージョン向けにプロジェクトを作成するか�
 
 このような画面が作成されればプロジェクトの作成は成功です。
 
-正しく生成できたか確認するために一旦ビルドしましょう。
+作成が成功したらNuGetの更新をしましょう
+プロジェクト名.UWPを右クリックしてNuGet パッケージの管理を選択しましょう
+![img](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/NuGet%E7%AE%A1%E7%90%86.png)
+
+ここでおそらく更新プログラムにXamarin.Formsがあると思いますので選択して更新しましょう！
+![img](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/NuGet%E6%9B%B4%E6%96%B0PNG_LI.jpg)
+
+
+正しく生成、更新できたか確認するために一旦ビルドしましょう。
 
 Windowsの方は下記の画像のようにビルドの設定を変えましょう
 ![xamarinForms初期ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xamarin%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89.jpg)
@@ -54,7 +62,31 @@ Macの方は下記の画像のようにビルドの設定を変えましょう
 このような実行結果が得られたらひとまず成功です。
 ![初期ビルド成功](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/%E5%88%9D%E6%9C%9F%E3%83%93%E3%83%AB%E3%83%89%E6%88%90%E5%8A%9F.PNG)
 
->## ノート
+>## Macの方へandroidでのビルド
+>
+>Macの方はxamarinstudioで進めているため、Xamarin.UWPファイルが存在せず、
+>ローカルPCでの起動ができないためandroidで起動しましょう
+>
+>xamarinstudioでのXamarinForms作成方法は以下の通りになります。
+>
+>まずはxamarinstudioを起動してください
+>
+>そして下記画像のように
+>
+>新しいソリューション => Multiplatform => Forms Appを選択してください
+>![Formapp](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Formsappp.png)
+>
+>作成ができたら以下のような画像のようなファイル構成でソリューションが作られます
+>![Macファイル](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Mac%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png)
+>
+>作成できましたら以下の画像のように左上の部分を変更してください
+>Xamarin.Droid > Debug > Androidエミュレーター or 実機
+>![Android](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/Macandroid%E8%B5%B7%E5%8B%95_Ink_LI.jpg)
+>上記画像のようにビルド成功してエミュレータが起動できれば成功です。（上記画像はPCのメモリが足りずアプリの画面まではいけてないのですがビルドは成功しています）
+>
+>後はWindowsと同じファイルを編集していくことになりますので引き続き作業を進めてください。
+
+>## Windowsの方へ、UWPでのビルドがうまくいかない場合
 >Windowsの方で実行ボタンを押すと図のようにエラーが出る場合があります。  
 >![img](./img/1/note/err.png)  
 >この場合はパッケージの更新を行うと解消できる場合があります。  
@@ -75,8 +107,6 @@ Macの方は下記の画像のようにビルドの設定を変えましょう
 >![img](img/1/note/uns3.png)   
 >しばらくまって出力に正常にインストールされましたと表示されれば完了です。 
 
-
-
 ## 2.画面をデザインしよう
 
 xamarinの開発においても今回はC#とXAMLという2つの言語を使います。
@@ -96,7 +126,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 なのでコードを直接記述してレイアウトの編集を行っていきます。
 
 
-## 2.1 初期に作られたコードを理解しよう！
+### 2.1 初期に作られたコードを理解しよう！
 
 まずはMainPage.xamlのコードを見てみましょう
 
@@ -140,7 +170,48 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 ここから色々と変えていきましょう
 
-## 2.2 ボタンとラベルを配置してみよう！
+文字の色を変えてみよう！
+
+MainPage.xaml.cs内のLabel x:Name内に
+
+```cs
+
+ TextColor="Blue" FontSize="Medium"
+
+```
+
+を追加してみましょう
+
+TextColorで文字の色を変更でき、FontSizeで文字の大きさを変更できます。自身で好きな値に変更してもらっても大丈夫です。
+
+追加した結果のコードは以下のようになります
+
+```cs
+
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:helloxamarin"
+             x:Class="helloxamarin.MainPage"
+             Title="Hello world">
+<StackLayout>
+
+  <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+  <Label x:Name="labelHelloWorld" Text="Change??"  TextColor="Blue" FontSize="Medium"
+         VerticalOptions="Center"        
+         HorizontalOptions="Center"/>
+  </StackLayout>
+
+</ContentPage>
+
+
+```
+
+これで起動してみましょう。
+
+![文字色変更](https://github.com/mspjp/20170122HandsOnTokyo/blob/recoverreadmd/Xamarin/img/%E6%96%87%E5%AD%97%E8%89%B2%E5%A4%89%E6%9B%B4.png)
+
+### 2.2 ボタンとラベルを配置してみよう！
 
 MainPage.xaml内の
 
@@ -186,17 +257,16 @@ MainPage.xaml内の
 
 ![xaml画像ビルド](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/xaml%E7%94%BB%E5%83%8F%E3%83%93%E3%83%AB%E3%83%89.png)
 
-## 2.3 ボタンを押したときにラベルを変化させよう！
+### 2.3 ボタンを押したときにラベルを変化させよう！
 
 MainPage.xaml.csを編集していきます。
 以下のように編集しましょう
 
-![Mainpage.xamal.cs編集画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/addxamarinreadmd/Xamarin/img/Xaml%E9%96%8B%E3%81%84%E3%81%9F%E3%82%B3%E3%83%BC%E3%83%89.PNG)
+![Mainpage.xamal.cs編集画面](https://github.com/mspjp/20170122HandsOnTokyo/blob/master/Xamarin/img/Mainpage.xaml.cs%E7%B7%A8%E9%9B%86%E7%94%BB%E9%9D%A2.PNG)
 
 上の画像はこのコードを追加したものです。
 
 ```cs
-
 button.Clicked += (sender, e) =>
 {
     this.labelHelloWorld.Text = "Hello World!";
@@ -224,6 +294,73 @@ button.Clicked += (sender, e) =>
 クリックしてラベルの文字が変更されれば成功です。
 
 何かエラーが発生した場合はメンターに質問してください。
+
+# 発展課題1 Githubのリポジトリ一覧をラベルに表示する
+昨今のアプリケーションではインターネットが当たり前となり、ネットからデータを取得したり、サーバとやり取りを行うことが少なくありません。
+この課題ではその一例として「ボタン」を押すと、GithubのAPIと接続し「エントリ」で指定したユーザのリポジトリ一覧を「ラベル」に表示するものを作成します。
+
+
+## 1. エントリの追加
+基本課題にコンポーネントを追加していきます。
+今回は文字入力を行う事ができるコンポーネントであるエントリ(Entry)を追加します。
+
+MainPage.xamlに以下のようになるように編集します.
+
+``` MainPage.xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:helloxamarin"
+             x:Class="helloxamarin.MainPage"
+             Title="Hello world">
+  <StackLayout>
+    <Entry /> <!-- Added  -->
+    <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+  </StackLayout>
+</ContentPage>
+```
+
+さらにC#コード側から操作できるようにコンポーネントに名前をつけます.ここでは`Entry`という名前をつけることにします。
+
+``` MainPage.xaml
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:helloxamarin"
+             x:Class="helloxamarin.MainPage"
+             Title="Hello world">
+  <StackLayout>
+    <Entry x:Name="Entry" /> <!-- Added  -->
+    <Button x:Name="button" Text="Button" VerticalOptions="Center" HorizontalOptions="Center" />
+    <Label x:Name="labelHelloWorld" Text="Change??"  VerticalOptions="Center" HorizontalOptions="Center"/>
+  </StackLayout>
+</ContentPage>
+```
+
+余裕があればプロパティを変更して自分好みのUIに仕上げましょう!
+
+Androidの場合はこんな感じになるはずです。
+
+図 Android Debug
+
+
+## 2. エントリに入力された文字を取得する
+
+続けてエントリに入力された文字列を取得します。
+ここではここでは実際に取得できたことを確認するため、`ボタン`を押すと、`エントリ`に入力された文字が`ラベル`に表示される物を作ります。
+
+ボタンのクリックイベントが起きた時に呼び出される`button_Click`メソッドの中身を変更します。
+
+```MainPage.xaml
+
+```
+
+
+
+
+
+
 
 
 # 発展課題2 Githubから取得したリポジトリを一覧表示する  
