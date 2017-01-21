@@ -23,18 +23,32 @@ namespace XamarinGithubReposOnList
             var result = await GetGithubRepos(name);
             this.List.ItemsSource = result;
         }
-
+                                                                                                                    
         public async Task<IList<string>> GetGithubRepos(string userName)
-        {
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
-            var jsonRaw = await httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos", userName));
+        {                                       
+            var jsonRaw = "";
             var ret = new List<string>();
-            var array = JArray.Parse(jsonRaw);
-            foreach (JToken token in array)
+            try
             {
-                ret.Add(token["name"].Value<string>());
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Add("User-Agent",
+                        "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
+                    jsonRaw = await httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos", userName));
+                }                                    
+                
+                var array = JArray.Parse(jsonRaw);
+                foreach (JToken token in array)
+                {
+                    ret.Add(token["name"].Value<string>());
+                }                
+
             }
+            catch (Exception e)
+            {                
+                await DisplayAlert("Error", e.ToString(), "OK");         
+            }
+
             return ret;
         }
     }

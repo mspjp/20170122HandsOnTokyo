@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26014.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "XamarinGithubReposOnList", "XamarinGithubReposOnList\XamarinGithubReposOnList.shproj", "{EE4B32E3-777D-4545-88DC-5D35ADB62D8F}"
 EndProject
@@ -15,6 +15,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		XamarinGithubReposOnList\XamarinGithubReposOnList.projitems*{4a0b5d00-6e2d-4845-aeb0-d0525d723ef6}*SharedItemsImports = 4
 		XamarinGithubReposOnList\XamarinGithubReposOnList.projitems*{67950cde-3508-4fd2-87b6-5439deb3736a}*SharedItemsImports = 4
+		XamarinGithubReposOnList\XamarinGithubReposOnList.projitems*{d93f4378-6bf6-415c-a856-e82dec270bb0}*SharedItemsImports = 4
 		XamarinGithubReposOnList\XamarinGithubReposOnList.projitems*{ee4b32e3-777d-4545-88dc-5d35adb62d8f}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

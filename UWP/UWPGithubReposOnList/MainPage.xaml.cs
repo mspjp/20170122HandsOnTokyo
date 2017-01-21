@@ -47,7 +47,7 @@ namespace UWPGithubReposOnList
             
             foreach (var src in sources)
             {             
-                this.RepoList.Items.Add(src.Url);
+                this.RepoList.Items.Add(src.Name);
             }
         }
 
