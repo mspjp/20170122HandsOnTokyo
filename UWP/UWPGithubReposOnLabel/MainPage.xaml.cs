@@ -33,26 +33,17 @@ namespace UWPGithubReposOnLabel
             this.Button.Click += button_Click;
         }
 
-        private async void button_Click(object sender, RoutedEventArgs e)
-        {
-            var dialog = new MessageDialog("Get Github repos", "Get Github repos");      // 直接叩きに行く or EditableBlock作ってもいいかも?
-            await dialog.ShowAsync();
-            var result = await GetGithubRepos("mizune");
+        private async void button_Click(object sender, RoutedEventArgs e) {
+            var name = this.UserName.Text;
+            var result = await GetGithubRepos(name);
             this.Label.Text = result;
-
-
         }
-        public async Task<string> GetGithubRepos(string userName) // or not WebClientは使えない
-        {
+
+        public async Task<string> GetGithubRepos(string userName) {
+            var url = string.Format("https://api.github.com/users/{0}/repos", userName);
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
-            // Debug.WriteLine(string.Format("https://api.github.com/users/{0}/repos"));
-
-            Debug.WriteLine(httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos", userName)));
-            return await  httpClient.GetStringAsync(string.Format("https://api.github.com/users/{0}/repos",userName));
-            
-            // this.label.Text = result;
-
+            return await httpClient.GetStringAsync(url);
         }
     }
 }
