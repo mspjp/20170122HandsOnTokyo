@@ -12,10 +12,11 @@ namespace helloxamarin
     public MainPage()
 		{
         InitializeComponent();
-            button.Clicked += (sender, e) =>
-            {
-                this.labelHelloWorld.Text = "Hello World!";
-            };
+            this.Button.Clicked += Button_Clicked;
         }
-	}
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            this.Label.Text = "Hello World!";
+        }
+    }
 }
