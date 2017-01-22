@@ -451,7 +451,7 @@ catch(Exception e)
 次にHttpClientクラスのインスタンスを作成し設定を行います。HttpClientは処理が終わったらきちんと解放したいためusingブロックを用います。
 これを用いることで処理が終わった後に自動的にCloseしてくれます。
 ```cs
-using(httpClient = new HttpClient())
+using(var httpClient = new HttpClient())
 {
   httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
 }
@@ -493,9 +493,9 @@ public async Task<string> GetGithubRepos(string userName)
     }
     catch (Exception e)
     {
-        await DisplayAlert("Error", e.ToString(), "OK");    
-	return null;
-    }   
+        await DisplayAlert("Error", e.ToString(), "OK");  
+    }
+    return "";
 }
 ```
 このメソッドを先程修正したButton_ClickedAsyncメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧を含むjsonがテキストブロックに表示されます。
