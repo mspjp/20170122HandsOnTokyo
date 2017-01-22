@@ -174,7 +174,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 文字の色を変えてみよう！
 
-MainPage.xaml.cs内のLabel x:Name内に
+MainPage.xaml内のLabel x:Name内に
 
 ```xaml
 
