@@ -474,6 +474,7 @@ return await httpClient.GetStringAsync(url);
 
 ```cs
 await DisplayAlert("Error", e.ToString(), "OK");
+return null;
 ```
 
 ここまでをまとめるとGetGithubReposメソッドは以下のようになります。
@@ -492,7 +493,8 @@ public async Task<string> GetGithubRepos(string userName)
     }
     catch (Exception e)
     {
-        await DisplayAlert("Error", e.ToString(), "OK");       
+        await DisplayAlert("Error", e.ToString(), "OK");    
+	return null;
     }   
 }
 ```
