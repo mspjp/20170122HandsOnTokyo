@@ -485,6 +485,7 @@ private async void Button_ClickedAsync(object sender, EventArgs e)
 このこまで実装した状態で、実行し、テキストボックスにGithubのユーザー名を入力してボタンを押すと以下のようになります。
 
 図　実行時
+![img](./img/xamarin_task1_finish.png)
 
 
 
