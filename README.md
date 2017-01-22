@@ -24,3 +24,5 @@
 ## 資料・リンク集
 
 [アンケート](https://stdntpartners-my.sharepoint.com/personal/masashi_michigami_studentpartner_com/_layouts/15/guestaccess.aspx?guestaccesstoken=w%2bsaLvpc4qP5mLXgZex0PbeG%2fXXEoBK45KKVz4S20SI%3d&docid=1_1b335cd944891484c94c1f2cccb7c89d4&wdFormId=%7B90206CE3%2D6B86%2D46F6%2D8051%2DD6E6321D0B01%7D)
+
+[UWPの概要](./doc/uwp.pdf)
