@@ -25,6 +25,6 @@
 
 [アンケート](https://stdntpartners-my.sharepoint.com/personal/masashi_michigami_studentpartner_com/_layouts/15/guestaccess.aspx?guestaccesstoken=Znyt8vxqREtsryx70T660eTvPPajdFsWe6kmzr73RMc%3d&docid=1_11e5c604b3cf54cc0beb6e0532d9c1c0a&wdFormId=%7B5B13BDAD%2D7E0D%2D4037%2DAEFD%2D5423D7B6CD93%7D)
 
-[UWPの概要](./doc/uwp.pdf)
-[UWP ハンズオン資料1(スライド)](./doc/170122_uwphandson.pdf)
+[UWPの概要](./doc/uwp.pdf)  
+[UWP ハンズオン資料1(スライド)](./doc/170122_uwphandson.pdf)  
 [UWP ハンズオン資料2(ドキュメント)](./UWP/README.md)
