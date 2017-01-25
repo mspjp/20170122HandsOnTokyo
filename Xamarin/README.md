@@ -174,7 +174,7 @@ UWPと違ってXamarinの方はグラフィカルビューがありませんの�
 
 文字の色を変えてみよう！
 
-MainPage.xaml.cs内のLabel x:Name内に
+MainPage.xaml内のLabel x:Name内に
 
 ```xaml
 
@@ -384,9 +384,33 @@ public MainPage()
 
 この状態でアプリケーションを立ち上げ、エントリに文字を入力しボタンを押すと図のようにラベルに同じ文字が表示されます。
 
-![img](./img/2/2.png)  
+![img](./img/2/2.png)
 
-## 3. GithubのAPIを呼び出す
+## 3.ライブラリの導入
+
+インターネット上からデータを取得するためのライブラリを追加します。
+
+ライブラリの導入にはnugetというパッケージマネージャーを利用します。  
+
+ソリューションを右クリックし「NuGetパッケージの管理(N)」を選択します。  
+![img](./img/3/1.png)  
+
+次に「参照」を選択し検索ボックスに「System.Net.Http」と入力します。  
+![img](./img/2/3.png)  
+
+「Microsoft.Net.Http」を選択し、**.Droidと.iOSのみ** にチェックを入れ「インストール」を選択します。  
+![img](./img/2/4.png)  
+
+インストールするプロジェクトの名前を確認して「OK」を選択します。  
+![img](./img/2/5.png)  
+
+ライセンスへの同意が求められたら「同意」を選択します。
+![img](./img/2/6.png)  
+
+出力に正常にインストールされましたと表示されれば完了です。  
+![img](./img/2/7.png)  
+
+## 4. GithubのAPIを呼び出す
 次は実際にGithubのAPIを呼び出し、指定したユーザのリポジトリ一覧を取得します。
 
 今回利用するAPIのエンドポイント(接続URL)は
@@ -427,7 +451,7 @@ catch(Exception e)
 次にHttpClientクラスのインスタンスを作成し設定を行います。HttpClientは処理が終わったらきちんと解放したいためusingブロックを用います。
 これを用いることで処理が終わった後に自動的にCloseしてくれます。
 ```cs
-using(httpClient = new HttpClient())
+using(var httpClient = new HttpClient())
 {
   httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2;WOW64; Trident / 6.0)");
 }
@@ -450,6 +474,7 @@ return await httpClient.GetStringAsync(url);
 
 ```cs
 await DisplayAlert("Error", e.ToString(), "OK");
+return null;
 ```
 
 ここまでをまとめるとGetGithubReposメソッドは以下のようになります。
@@ -468,8 +493,9 @@ public async Task<string> GetGithubRepos(string userName)
     }
     catch (Exception e)
     {
-        await DisplayAlert("Error", e.ToString(), "OK");       
-    }   
+        await DisplayAlert("Error", e.ToString(), "OK");  
+    }
+    return "";
 }
 ```
 このメソッドを先程修正したButton_ClickedAsyncメソッドの中で呼び出してやればテキストボックスに指定したユーザーのGithubのリポジトリ一覧を含むjsonがテキストブロックに表示されます。
@@ -487,21 +513,6 @@ private async void Button_ClickedAsync(object sender, EventArgs e)
 図　実行時
 ![img](./img/xamarin_task1_finish.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 発展課題2 Githubから取得したリポジトリを一覧表示する  
 先程までの手順でGithubのAPIを呼び出し、指定したユーザーのリポジトリ一覧を含むjsonを取得できました。  
 ここの手順では取得したjsonからC#のオブジェクトに変換し、一覧表示をします。  
@@ -512,8 +523,6 @@ private async void Button_ClickedAsync(object sender, EventArgs e)
 Json.netを利用したjsonからC#のオブジェクトに変換する方法として複数の方法がありますが、ここではJson.netが提供するjsonのオブジェクトの配列を格納するJArrayとJsonのオブジェクトを示すJTokenに変換します。  
 
 json.netについては[こちら](http://www.newtonsoft.com/json)を御覧ください。  
-
-ライブラリの導入にはnugetというパッケージマネージャーを利用します。  
 
 ソリューションを右クリックし「NuGetパッケージの管理(N)」を選択します。  
 ![img](./img/3/1.png)  
